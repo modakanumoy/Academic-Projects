@@ -1,0 +1,1312 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}assignments_2
+       {txt}log:  {res}C:\Users\LENOVO\OneDrive\Desktop\Time_Series_Econometrics_Assignment\Time_Series_Econometrics_Assignment.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}19 Oct 2023, 18:16:28
+{txt}
+{com}. tsset t
+{res}{txt}{col 9}time variable:  {res}{col 25}t, 1 to 100
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}. 
+. 
+. ***Ploting variable xit.views regarding stationarity*****
+. 
+. foreach x of varlist x* {c -(}
+{txt}  2{com}. tsline `x'
+{txt}  3{com}. graph export `x'stationarity_Analysis.png, as(png) replace
+{txt}  4{com}. {c )-}
+{res}{txt}(file x1tstationarity_Analysis.png written in PNG format)
+{res}{txt}(file x2tstationarity_Analysis.png written in PNG format)
+{res}{txt}(file x3tstationarity_Analysis.png written in PNG format)
+{res}{txt}(file x4tstationarity_Analysis.png written in PNG format)
+{res}{txt}(file x5tstationarity_Analysis.png written in PNG format)
+{res}{txt}(file x6tstationarity_Analysis.png written in PNG format)
+{res}{txt}(file x7tstationarity_Analysis.png written in PNG format)
+{res}{txt}(file x8tstationarity_Analysis.png written in PNG format)
+{res}{txt}(file x9tstationarity_Analysis.png written in PNG format)
+{res}{txt}(file x10tstationarity_Analysis.png written in PNG format)
+
+{com}. 
+. /*****Checking whether xit is stationary or not using Dicky Fuller and
+>  Elliot Rothenberg and Stock(DFGLS) tests statistics.
+> */
+. 
+. **Dicky-fuller test using x4t**
+. 
+. reg D.x4t L.x4t
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        99
+{txt}{hline 13}{c +}{hline 34}   F(1, 97)        = {res}    16.71
+{txt}       Model {c |} {res} 2792.99401         1  2792.99401   {txt}Prob > F        ={res}    0.0001
+{txt}    Residual {c |} {res} 16216.9194        97  167.184736   {txt}R-squared       ={res}    0.1469
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1381
+{txt}       Total {c |} {res} 19009.9134        98  193.978708   {txt}Root MSE        =   {res}  12.93
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x4t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x4t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2832257{col 26}{space 2}  .069294{col 37}{space 1}   -4.09{col 46}{space 3}0.000{col 54}{space 4}-.4207552{col 67}{space 3}-.1456962
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}  7.32688{col 26}{space 2} 2.077597{col 37}{space 1}    3.53{col 46}{space 3}0.001{col 54}{space 4} 3.203426{col 67}{space 3} 11.45033
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg x4t t
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       100
+{txt}{hline 13}{c +}{hline 34}   F(1, 98)        = {res}   307.23
+{txt}       Model {c |} {res} 27070.3004         1  27070.3004   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 8634.78962        98  88.1100981   {txt}R-squared       ={res}    0.7582
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.7557
+{txt}       Total {c |} {res}   35705.09        99  360.657475   {txt}Root MSE        =   {res} 9.3867
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         x4t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}t {c |}{col 14}{res}{space 2}  .569979{col 26}{space 2} .0325181{col 37}{space 1}   17.53{col 46}{space 3}0.000{col 54}{space 4} .5054479{col 67}{space 3} .6345101
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-5.091405{col 26}{space 2} 1.891508{col 37}{space 1}   -2.69{col 46}{space 3}0.008{col 54}{space 4}-8.845042{col 67}{space 3}-1.337768
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict x4t_trendless, resid
+{txt}
+{com}. 
+. reg D.x4t_trendless L.x4t_trendless 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        99
+{txt}{hline 13}{c +}{hline 34}   F(1, 97)        = {res}   122.59
+{txt}       Model {c |} {res} 10612.7855         1  10612.7855   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  8397.1281        97   86.568331   {txt}R-squared       ={res}    0.5583
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.5537
+{txt}       Total {c |} {res} 19009.9136        98   193.97871   {txt}Root MSE        =   {res} 9.3042
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}D.           {col 15}{c |}
+{col 1}x4t_trendless{col 15}{c |}      Coef.{col 27}   Std. Err.{col 39}      t{col 47}   P>|t|{col 55}     [95% Con{col 68}f. Interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+x4t_trendless {c |}
+{space 10}L1. {c |}{col 15}{res}{space 2}-1.108766{col 27}{space 2} .1001394{col 38}{space 1}  -11.07{col 47}{space 3}0.000{col 55}{space 4}-1.307515{col 68}{space 3}-.9100173
+{txt}{space 13} {c |}
+{space 8}_cons {c |}{col 15}{res}{space 2} .1154466{col 27}{space 2} .9351094{col 38}{space 1}    0.12{col 47}{space 3}0.902{col 55}{space 4}-1.740487{col 68}{space 3}  1.97138
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. foreach var of varlist x*{c -(}
+{txt}  2{com}. *For x`var't*
+. 
+. varsoc `var', maxlag(10)
+{txt}  3{com}. {c )-}
+
+{txt}{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-491.563{col 18}{col 27}{col 32}{col 39} 3320.84{col 48}{space 1} 10.9458{col 58}{space 1} 10.9571{col 68}{space 1} 10.9736{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-330.647{col 18}{space 1} 321.83{col 26}*{col 27}   1{col 32} 0.000{col 39} 95.0387{col 47}*{col 48}{space 1} 7.39215{col 57}*{col 58}{space 1} 7.41456{col 67}*{col 68}{space 1} 7.44771{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-330.471{col 18}{space 1}  .3518{col 27}   1{col 32} 0.553{col 39} 96.7969{col 48}{space 1} 7.41047{col 58}{space 1} 7.44407{col 68}{space 1} 7.49379{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1} -330.45{col 18}{space 1} .04289{col 27}   1{col 32} 0.836{col 39} 98.9282{col 48}{space 1} 7.43221{col 58}{space 1} 7.47702{col 68}{space 1} 7.54332{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-330.231{col 18}{space 1} .43645{col 27}   1{col 32} 0.509{col 39} 100.668{col 48}{space 1} 7.44959{col 58}{space 1} 7.50559{col 68}{space 1} 7.58846{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-330.224{col 18}{space 1} .01501{col 27}   1{col 32} 0.902{col 39} 102.921{col 48}{space 1} 7.47164{col 58}{space 1} 7.53885{col 68}{space 1}  7.6383{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-329.817{col 18}{space 1} .81296{col 27}   1{col 32} 0.367{col 39}   104.3{col 48}{space 1} 7.48483{col 58}{space 1} 7.56324{col 68}{space 1} 7.67926{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-328.418{col 18}{space 1} 2.7995{col 27}   1{col 32} 0.094{col 39} 103.393{col 48}{space 1} 7.47595{col 58}{space 1} 7.56555{col 68}{space 1} 7.69815{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-328.405{col 18}{space 1} .02432{col 27}   1{col 32} 0.876{col 39} 105.709{col 48}{space 1}  7.4979{col 58}{space 1} 7.59871{col 68}{space 1} 7.74788{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-328.396{col 18}{space 1} .01929{col 27}   1{col 32} 0.890{col 39} 108.089{col 48}{space 1} 7.51991{col 58}{space 1} 7.63192{col 68}{space 1} 7.79766{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-327.821{col 18}{space 1} 1.1498{col 27}   1{col 32} 0.284{col 39} 109.148{col 48}{space 1} 7.52935{col 58}{space 1} 7.65256{col 68}{space 1} 7.83489{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x1t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-491.899{col 18}{col 27}{col 32}{col 39} 3345.68{col 48}{space 1} 10.9533{col 58}{space 1} 10.9645{col 68}{space 1} 10.9811{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-330.645{col 18}{space 1} 322.51{col 26}*{col 27}   1{col 32} 0.000{col 39}  95.034{col 47}*{col 48}{space 1}  7.3921{col 57}*{col 58}{space 1} 7.41451{col 67}*{col 68}{space 1} 7.44766{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-330.468{col 18}{space 1} .35335{col 27}   1{col 32} 0.552{col 39} 96.7904{col 48}{space 1}  7.4104{col 58}{space 1}   7.444{col 68}{space 1} 7.49373{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-330.447{col 18}{space 1} .04243{col 27}   1{col 32} 0.837{col 39} 98.9221{col 48}{space 1} 7.43215{col 58}{space 1} 7.47695{col 68}{space 1} 7.54325{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-330.229{col 18}{space 1} .43502{col 27}   1{col 32} 0.510{col 39} 100.663{col 48}{space 1} 7.44954{col 58}{space 1} 7.50554{col 68}{space 1} 7.58842{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-330.222{col 18}{space 1} .01527{col 27}   1{col 32} 0.902{col 39} 102.916{col 48}{space 1} 7.47159{col 58}{space 1}  7.5388{col 68}{space 1} 7.63825{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-329.814{col 18}{space 1} .81507{col 27}   1{col 32} 0.367{col 39} 104.292{col 48}{space 1} 7.48476{col 58}{space 1} 7.56316{col 68}{space 1} 7.67919{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-328.416{col 18}{space 1} 2.7955{col 27}   1{col 32} 0.095{col 39}  103.39{col 48}{space 1} 7.47592{col 58}{space 1} 7.56553{col 68}{space 1} 7.69812{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-328.404{col 18}{space 1} .02468{col 27}   1{col 32} 0.875{col 39} 105.706{col 48}{space 1} 7.49787{col 58}{space 1} 7.59867{col 68}{space 1} 7.74785{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-328.394{col 18}{space 1} .01955{col 27}   1{col 32} 0.889{col 39} 108.085{col 48}{space 1} 7.51987{col 58}{space 1} 7.63188{col 68}{space 1} 7.79763{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-327.818{col 18}{space 1}  1.152{col 27}   1{col 32} 0.283{col 39} 109.141{col 48}{space 1} 7.52929{col 58}{space 1}  7.6525{col 68}{space 1} 7.83483{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x2t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-332.061{col 18}{col 27}{col 32}{col 39} 95.9172{col 47}*{col 48}{space 1} 7.40136{col 57}*{col 58}{space 1} 7.41256{col 67}*{col 68}{space 1} 7.42914{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-331.913{col 18}{space 1} .29647{col 27}   1{col 32} 0.586{col 39} 97.7506{col 48}{space 1} 7.42029{col 58}{space 1} 7.44269{col 68}{space 1} 7.47584{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-331.888{col 18}{space 1} .04921{col 27}   1{col 32} 0.824{col 39} 99.8943{col 48}{space 1} 7.44196{col 58}{space 1} 7.47557{col 68}{space 1} 7.52529{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-331.662{col 18}{space 1} .45318{col 27}   1{col 32} 0.501{col 39} 101.629{col 48}{space 1} 7.45915{col 58}{space 1} 7.50395{col 68}{space 1} 7.57025{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-331.655{col 18}{space 1}  .0129{col 27}   1{col 32} 0.910{col 39} 103.904{col 48}{space 1} 7.48123{col 58}{space 1} 7.53723{col 68}{space 1} 7.62011{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-331.299{col 18}{space 1} .71327{col 27}   1{col 32} 0.398{col 39} 105.409{col 48}{space 1} 7.49553{col 58}{space 1} 7.56273{col 68}{space 1} 7.66218{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-329.794{col 18}{space 1} 3.0093{col 27}   1{col 32} 0.083{col 39} 104.246{col 48}{space 1} 7.48431{col 58}{space 1} 7.56272{col 68}{space 1} 7.67874{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-329.786{col 18}{space 1} .01548{col 27}   1{col 32} 0.901{col 39} 106.586{col 48}{space 1} 7.50636{col 58}{space 1} 7.59597{col 68}{space 1} 7.72857{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-329.783{col 18}{space 1} .00737{col 27}   1{col 32} 0.932{col 39} 108.994{col 48}{space 1}  7.5285{col 58}{space 1} 7.62931{col 68}{space 1} 7.77848{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-329.274{col 18}{space 1} 1.0175{col 27}   1{col 32} 0.313{col 39} 110.218{col 48}{space 1} 7.53942{col 58}{space 1} 7.65143{col 68}{space 1} 7.81718{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-325.727{col 18}{space 1} 7.0941{col 26}*{col 27}   1{col 32} 0.008{col 39} 104.185{col 48}{space 1} 7.48282{col 58}{space 1} 7.60603{col 68}{space 1} 7.78835{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x3t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-385.436{col 18}{col 27}{col 32}{col 39} 314.065{col 48}{space 1} 8.58748{col 58}{space 1} 8.59868{col 68}{space 1} 8.61525{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}  -357.8{col 18}{space 1} 55.273{col 27}   1{col 32} 0.000{col 39} 173.761{col 48}{space 1} 7.99555{col 58}{space 1} 8.01795{col 68}{space 1}  8.0511{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-347.681{col 18}{space 1} 20.238{col 27}   1{col 32} 0.000{col 39} 141.891{col 48}{space 1} 7.79291{col 58}{space 1} 7.82652{col 68}{space 1} 7.87624{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-341.941{col 18}{space 1} 11.481{col 27}   1{col 32} 0.001{col 39} 127.709{col 48}{space 1} 7.68757{col 58}{space 1} 7.73237{col 68}{space 1} 7.79867{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-340.178{col 18}{space 1} 3.5254{col 27}   1{col 32} 0.060{col 39}  125.57{col 48}{space 1} 7.67062{col 58}{space 1} 7.72663{col 68}{space 1}  7.8095{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-339.727{col 18}{space 1} .90197{col 27}   1{col 32} 0.342{col 39} 127.122{col 48}{space 1} 7.68282{col 58}{space 1} 7.75003{col 68}{space 1} 7.84948{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-334.831{col 18}{space 1} 9.7911{col 26}*{col 27}   1{col 32} 0.002{col 39} 116.593{col 47}*{col 48}{space 1} 7.59626{col 57}*{col 58}{space 1} 7.67466{col 67}*{col 68}{space 1} 7.79068{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-334.433{col 18}{space 1} .79688{col 27}   1{col 32} 0.372{col 39} 118.181{col 48}{space 1} 7.60962{col 58}{space 1} 7.69923{col 68}{space 1} 7.83183{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1} -334.05{col 18}{space 1} .76622{col 27}   1{col 32} 0.381{col 39} 119.836{col 48}{space 1} 7.62333{col 58}{space 1} 7.72414{col 68}{space 1} 7.87331{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-334.049{col 18}{space 1} .00187{col 27}   1{col 32} 0.965{col 39} 122.557{col 48}{space 1} 7.64553{col 58}{space 1} 7.75754{col 68}{space 1} 7.92329{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-333.078{col 18}{space 1} 1.9429{col 27}   1{col 32} 0.163{col 39} 122.673{col 48}{space 1} 7.64617{col 58}{space 1} 7.76938{col 68}{space 1}  7.9517{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x4t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-695.786{col 18}{col 27}{col 32}{col 39}  310599{col 48}{space 1} 15.4841{col 58}{space 1} 15.4953{col 68}{space 1} 15.5119{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-332.588{col 18}{space 1}  726.4{col 26}*{col 27}   1{col 32} 0.000{col 39} 99.2272{col 47}*{col 48}{space 1} 7.43528{col 57}*{col 58}{space 1} 7.45768{col 67}*{col 68}{space 1} 7.49083{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-332.409{col 18}{space 1} .35761{col 27}   1{col 32} 0.550{col 39} 101.056{col 48}{space 1} 7.45353{col 58}{space 1} 7.48713{col 68}{space 1} 7.53686{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-332.392{col 18}{space 1} .03385{col 27}   1{col 32} 0.854{col 39} 103.292{col 48}{space 1} 7.47538{col 58}{space 1} 7.52018{col 68}{space 1} 7.58648{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-332.176{col 18}{space 1} .43115{col 27}   1{col 32} 0.511{col 39} 105.114{col 48}{space 1} 7.49281{col 58}{space 1} 7.54881{col 68}{space 1} 7.63169{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-332.169{col 18}{space 1} .01511{col 27}   1{col 32} 0.902{col 39} 107.467{col 48}{space 1} 7.51486{col 58}{space 1} 7.58207{col 68}{space 1} 7.68152{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-331.779{col 18}{space 1} .77951{col 27}   1{col 32} 0.377{col 39} 108.947{col 48}{space 1} 7.52842{col 58}{space 1} 7.60683{col 68}{space 1} 7.72285{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-330.375{col 18}{space 1} 2.8084{col 27}   1{col 32} 0.094{col 39}  107.99{col 48}{space 1} 7.51944{col 58}{space 1} 7.60905{col 68}{space 1} 7.74165{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-330.343{col 18}{space 1} .06441{col 27}   1{col 32} 0.800{col 39} 110.359{col 48}{space 1} 7.54095{col 58}{space 1} 7.64175{col 68}{space 1} 7.79093{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-330.342{col 18}{space 1} .00064{col 27}   1{col 32} 0.980{col 39} 112.867{col 48}{space 1} 7.56316{col 58}{space 1} 7.67517{col 68}{space 1} 7.84092{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-329.801{col 18}{space 1} 1.0822{col 27}   1{col 32} 0.298{col 39} 114.059{col 48}{space 1} 7.57336{col 58}{space 1} 7.69657{col 68}{space 1} 7.87889{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x5t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-700.723{col 18}{col 27}{col 32}{col 39}  346618{col 48}{space 1} 15.5939{col 58}{space 1} 15.6051{col 68}{space 1} 15.6216{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-367.878{col 18}{space 1} 665.69{col 27}   1{col 32} 0.000{col 39} 217.379{col 48}{space 1} 8.21951{col 58}{space 1} 8.24191{col 68}{space 1} 8.27506{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1} -354.32{col 18}{space 1} 27.116{col 27}   1{col 32} 0.000{col 39} 164.447{col 48}{space 1} 7.94044{col 58}{space 1} 7.97404{col 68}{space 1} 8.02377{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-350.553{col 18}{space 1} 7.5342{col 27}   1{col 32} 0.006{col 39} 154.645{col 48}{space 1} 7.87895{col 58}{space 1} 7.92375{col 68}{space 1} 7.99005{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1} -350.47{col 18}{space 1} .16526{col 27}   1{col 32} 0.684{col 39} 157.839{col 48}{space 1} 7.89934{col 58}{space 1} 7.95534{col 68}{space 1} 8.03821{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-350.051{col 18}{space 1} .83856{col 27}   1{col 32} 0.360{col 39} 159.902{col 48}{space 1} 7.91224{col 58}{space 1} 7.97945{col 68}{space 1} 8.07889{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-349.811{col 18}{space 1} .47879{col 27}   1{col 32} 0.489{col 39} 162.647{col 48}{space 1} 7.92914{col 58}{space 1} 8.00755{col 68}{space 1} 8.12357{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-347.942{col 18}{space 1}  3.739{col 27}   1{col 32} 0.053{col 39} 159.559{col 48}{space 1} 7.90982{col 58}{space 1} 7.99943{col 68}{space 1} 8.13203{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-346.374{col 18}{space 1} 3.1351{col 27}   1{col 32} 0.077{col 39} 157.591{col 48}{space 1} 7.89721{col 58}{space 1} 7.99802{col 68}{space 1} 8.14719{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-343.839{col 18}{space 1} 5.0709{col 27}   1{col 32} 0.024{col 39} 152.343{col 48}{space 1} 7.86309{col 58}{space 1}  7.9751{col 68}{space 1} 8.14084{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-339.306{col 18}{space 1}  9.065{col 26}*{col 27}   1{col 32} 0.003{col 39} 140.884{col 47}*{col 48}{space 1} 7.78459{col 57}*{col 58}{space 1}  7.9078{col 67}*{col 68}{space 1} 8.09012{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x6t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-590.965{col 18}{col 27}{col 32}{col 39} 30239.3{col 48}{space 1} 13.1548{col 58}{space 1}  13.166{col 68}{space 1} 13.1826{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-400.686{col 18}{space 1} 380.56{col 27}   1{col 32} 0.000{col 39} 450.657{col 48}{space 1} 8.94858{col 58}{space 1} 8.97098{col 68}{space 1} 9.00413{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-394.299{col 18}{space 1} 12.773{col 27}   1{col 32} 0.000{col 39} 399.823{col 47}*{col 48}{space 1} 8.82887{col 57}*{col 58}{space 1} 8.86248{col 67}*{col 68}{space 1}  8.9122{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-393.625{col 18}{space 1} 1.3488{col 27}   1{col 32} 0.245{col 39}  402.74{col 48}{space 1} 8.83611{col 58}{space 1} 8.88091{col 68}{space 1} 8.94721{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-392.936{col 18}{space 1} 1.3781{col 27}   1{col 32} 0.240{col 39} 405.555{col 48}{space 1} 8.84302{col 58}{space 1} 8.89902{col 68}{space 1}  8.9819{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-392.267{col 18}{space 1} 1.3376{col 27}   1{col 32} 0.247{col 39} 408.586{col 48}{space 1} 8.85038{col 58}{space 1} 8.91759{col 68}{space 1} 9.01703{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1} -392.14{col 18}{space 1} .25517{col 27}   1{col 32} 0.613{col 39} 416.633{col 48}{space 1} 8.86977{col 58}{space 1} 8.94817{col 68}{space 1}  9.0642{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-391.235{col 18}{space 1} 1.8091{col 27}   1{col 32} 0.179{col 39} 417.583{col 48}{space 1} 8.87189{col 58}{space 1}  8.9615{col 68}{space 1} 9.09409{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-390.835{col 18}{space 1} .79906{col 27}   1{col 32} 0.371{col 39} 423.277{col 48}{space 1} 8.88523{col 58}{space 1} 8.98604{col 68}{space 1} 9.13521{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-390.808{col 18}{space 1} .05467{col 27}   1{col 32} 0.815{col 39} 432.634{col 48}{space 1} 8.90685{col 58}{space 1} 9.01886{col 68}{space 1}  9.1846{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-387.828{col 18}{space 1}  5.961{col 26}*{col 27}   1{col 32} 0.015{col 39} 414.133{col 48}{space 1} 8.86284{col 58}{space 1} 8.98605{col 68}{space 1} 9.16837{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x7t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-554.282{col 18}{col 27}{col 32}{col 39} 13382.7{col 48}{space 1} 12.3396{col 58}{space 1} 12.3508{col 68}{space 1} 12.3674{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-393.028{col 18}{space 1} 322.51{col 26}*{col 27}   1{col 32} 0.000{col 39} 380.136{col 47}*{col 48}{space 1}  8.7784{col 57}*{col 58}{space 1}  8.8008{col 67}*{col 68}{space 1} 8.83395{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-392.851{col 18}{space 1} .35335{col 27}   1{col 32} 0.552{col 39} 387.162{col 48}{space 1} 8.79669{col 58}{space 1}  8.8303{col 68}{space 1} 8.88002{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1} -392.83{col 18}{space 1} .04243{col 27}   1{col 32} 0.837{col 39} 395.688{col 48}{space 1} 8.81845{col 58}{space 1} 8.86325{col 68}{space 1} 8.92955{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-392.613{col 18}{space 1} .43502{col 27}   1{col 32} 0.510{col 39} 402.652{col 48}{space 1} 8.83583{col 58}{space 1} 8.89184{col 68}{space 1} 8.97471{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-392.605{col 18}{space 1} .01527{col 27}   1{col 32} 0.902{col 39} 411.664{col 48}{space 1} 8.85789{col 58}{space 1} 8.92509{col 68}{space 1} 9.02454{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-392.197{col 18}{space 1} .81507{col 27}   1{col 32} 0.367{col 39} 417.169{col 48}{space 1} 8.87105{col 58}{space 1} 8.94946{col 68}{space 1} 9.06548{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}  -390.8{col 18}{space 1} 2.7955{col 27}   1{col 32} 0.095{col 39} 413.562{col 48}{space 1} 8.86221{col 58}{space 1} 8.95182{col 68}{space 1} 9.08442{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-390.787{col 18}{space 1} .02468{col 27}   1{col 32} 0.875{col 39} 422.824{col 48}{space 1} 8.88416{col 58}{space 1} 8.98497{col 68}{space 1} 9.13414{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-390.777{col 18}{space 1} .01955{col 27}   1{col 32} 0.889{col 39} 432.339{col 48}{space 1} 8.90617{col 58}{space 1} 9.01817{col 68}{space 1} 9.18392{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}  -390.1{col 18}{space 1} 1.3545{col 27}   1{col 32} 0.244{col 39} 435.585{col 48}{space 1} 8.91334{col 58}{space 1} 9.03655{col 68}{space 1} 9.21887{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x8t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-373.861{col 18}{col 27}{col 32}{col 39} 242.832{col 48}{space 1} 8.33025{col 58}{space 1} 8.34145{col 68}{space 1} 8.35802{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-355.176{col 18}{space 1} 37.371{col 27}   1{col 32} 0.000{col 39} 163.919{col 48}{space 1} 7.93724{col 58}{space 1} 7.95964{col 68}{space 1} 7.99279{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-346.675{col 18}{space 1} 17.001{col 27}   1{col 32} 0.000{col 39} 138.756{col 48}{space 1} 7.77057{col 58}{space 1} 7.80417{col 68}{space 1} 7.85389{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-341.469{col 18}{space 1} 10.413{col 27}   1{col 32} 0.001{col 39} 126.377{col 48}{space 1} 7.67709{col 58}{space 1} 7.72189{col 68}{space 1} 7.78819{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-339.873{col 18}{space 1}  3.193{col 27}   1{col 32} 0.074{col 39}  124.72{col 48}{space 1} 7.66383{col 58}{space 1} 7.71984{col 68}{space 1} 7.80271{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-339.478{col 18}{space 1} .78944{col 27}   1{col 32} 0.374{col 39} 126.419{col 48}{space 1} 7.67728{col 58}{space 1} 7.74449{col 68}{space 1} 7.84394{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-334.702{col 18}{space 1} 9.5515{col 26}*{col 27}   1{col 32} 0.002{col 39} 116.259{col 47}*{col 48}{space 1} 7.59338{col 57}*{col 58}{space 1} 7.67178{col 67}*{col 68}{space 1} 7.78781{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-334.325{col 18}{space 1} .75457{col 27}   1{col 32} 0.385{col 39} 117.897{col 48}{space 1} 7.60722{col 58}{space 1} 7.69682{col 68}{space 1} 7.82942{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-333.962{col 18}{space 1} .72575{col 27}   1{col 32} 0.394{col 39} 119.602{col 48}{space 1} 7.62138{col 58}{space 1} 7.72218{col 68}{space 1} 7.87136{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1} -333.96{col 18}{space 1} .00408{col 27}   1{col 32} 0.949{col 39} 122.315{col 48}{space 1} 7.64355{col 58}{space 1} 7.75556{col 68}{space 1} 7.92131{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-332.957{col 18}{space 1} 2.0063{col 27}   1{col 32} 0.157{col 39} 122.344{col 48}{space 1} 7.64348{col 58}{space 1} 7.76669{col 68}{space 1} 7.94901{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x9t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-654.348{col 18}{col 27}{col 32}{col 39}  123674{col 48}{space 1} 14.5633{col 58}{space 1} 14.5745{col 68}{space 1} 14.5911{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-448.252{col 18}{space 1} 412.19{col 27}   1{col 32} 0.000{col 39}  1296.9{col 48}{space 1} 10.0056{col 58}{space 1}  10.028{col 68}{space 1} 10.0612{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-444.451{col 18}{space 1} 7.6018{col 27}   1{col 32} 0.006{col 39} 1218.66{col 48}{space 1} 9.94336{col 58}{space 1} 9.97697{col 68}{space 1} 10.0267{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-436.382{col 18}{space 1} 16.139{col 27}   1{col 32} 0.000{col 39} 1041.53{col 48}{space 1} 9.78627{col 58}{space 1} 9.83107{col 68}{space 1} 9.89737{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1} -433.04{col 18}{space 1} 6.6836{col 27}   1{col 32} 0.010{col 39} 988.772{col 48}{space 1} 9.73423{col 58}{space 1} 9.79023{col 68}{space 1}  9.8731{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-432.695{col 18}{space 1} .69066{col 27}   1{col 32} 0.406{col 39} 1003.35{col 48}{space 1} 9.74877{col 58}{space 1} 9.81598{col 68}{space 1} 9.91543{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-431.715{col 18}{space 1} 1.9594{col 27}   1{col 32} 0.162{col 39} 1003.92{col 48}{space 1} 9.74923{col 58}{space 1} 9.82763{col 68}{space 1} 9.94366{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-430.574{col 18}{space 1} 2.2817{col 27}   1{col 32} 0.131{col 39} 1000.93{col 48}{space 1}  9.7461{col 58}{space 1}  9.8357{col 68}{space 1}  9.9683{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-428.011{col 18}{space 1} 5.1264{col 27}   1{col 32} 0.024{col 39} 966.955{col 48}{space 1} 9.71136{col 58}{space 1} 9.81216{col 68}{space 1} 9.96134{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-424.051{col 18}{space 1} 7.9204{col 26}*{col 27}   1{col 32} 0.005{col 39}  905.62{col 47}*{col 48}{space 1} 9.64558{col 57}*{col 58}{space 1} 9.75758{col 67}*{col 68}{space 1} 9.92333{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-423.504{col 18}{space 1} 1.0931{col 27}   1{col 32} 0.296{col 39} 915.072{col 48}{space 1} 9.65565{col 58}{space 1} 9.77886{col 68}{space 1} 9.96118{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x10t
+{space 3} Exogenous:  _cons
+
+{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-330.628{col 18}{col 27}{col 32}{col 39} 92.9107{col 47}*{col 48}{space 1} 7.36951{col 57}*{col 58}{space 1} 7.38072{col 67}*{col 68}{space 1} 7.39729{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-330.238{col 18}{space 1} .78116{col 27}   1{col 32} 0.377{col 39} 94.1781{col 48}{space 1} 7.38306{col 58}{space 1} 7.40546{col 68}{space 1} 7.43861{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-330.236{col 18}{space 1} .00355{col 27}   1{col 32} 0.953{col 39} 96.2922{col 48}{space 1} 7.40524{col 58}{space 1} 7.43884{col 68}{space 1} 7.48857{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-330.153{col 18}{space 1} .16517{col 27}   1{col 32} 0.684{col 39} 98.2788{col 48}{space 1} 7.42563{col 58}{space 1} 7.47043{col 68}{space 1} 7.53673{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-330.085{col 18}{space 1} .13556{col 27}   1{col 32} 0.713{col 39} 100.342{col 48}{space 1} 7.44634{col 58}{space 1} 7.50235{col 68}{space 1} 7.58522{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-329.381{col 18}{space 1} 1.4097{col 27}   1{col 32} 0.235{col 39}  101.01{col 48}{space 1}  7.4529{col 58}{space 1} 7.52011{col 68}{space 1} 7.61956{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-328.419{col 18}{space 1} 1.9224{col 27}   1{col 32} 0.166{col 39} 101.109{col 48}{space 1} 7.45376{col 58}{space 1} 7.53217{col 68}{space 1} 7.64819{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-328.325{col 18}{space 1} .18953{col 27}   1{col 32} 0.663{col 39}  103.18{col 48}{space 1} 7.47388{col 58}{space 1} 7.56349{col 68}{space 1} 7.69609{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-328.256{col 18}{space 1} .13754{col 27}   1{col 32} 0.711{col 39} 105.358{col 48}{space 1} 7.49457{col 58}{space 1} 7.59538{col 68}{space 1} 7.74456{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-327.351{col 18}{space 1} 1.8104{col 27}   1{col 32} 0.178{col 39} 105.607{col 48}{space 1} 7.49668{col 58}{space 1} 7.60869{col 68}{space 1} 7.77444{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-322.159{col 18}{space 1} 10.384{col 26}*{col 27}   1{col 32} 0.001{col 39} 96.2431{col 48}{space 1} 7.40353{col 58}{space 1} 7.52674{col 68}{space 1} 7.70906{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x4t_trendless
+{space 3} Exogenous:  _cons
+
+{com}. 
+. *PART 1:(Augmented Dicky Fuller test)*
+. dfuller x1t, regress trend lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       98
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -0.309            -4.044            -3.452            -3.151
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.9893
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x1t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+         x1t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17}-.0098037{col 28} .0316979{col 38}   -0.31{col 48} 0.758{col 58}-.0727406{col 70} .0531331
+{txt}{col 10}LD. {c |}{res}{col 17} -.096259{col 28} .1055916{col 38}   -0.91{col 48} 0.364{col 58}-.3059136{col 70} .1133955
+      {txt}_trend{col 14}{c |}{res}{col 17} .0524146{col 28} .0722891{col 38}    0.73{col 48} 0.470{col 58} -.091117{col 70} .1959463
+       {txt}_cons{col 14}{c |}{res}{col 17}-5.541951{col 28} 2.288306{col 38}   -2.42{col 48} 0.017{col 58}-10.08544{col 70}-.9984647
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x1t,  regress lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       98
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -2.003            -3.513            -2.892            -2.581
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.2854
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x1t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x1t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0300366{col 26}{space 2} .0149985{col 37}{space 1}   -2.00{col 46}{space 3}0.048{col 54}{space 4}-.0598123{col 67}{space 3}-.0002609
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}-.0733567{col 26}{space 2} .1005047{col 37}{space 1}   -0.73{col 46}{space 3}0.467{col 54}{space 4}-.2728838{col 67}{space 3} .1261704
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-5.639785{col 26}{space 2} 2.278616{col 37}{space 1}   -2.48{col 46}{space 3}0.015{col 54}{space 4}-10.16341{col 67}{space 3}-1.116161
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller x2t, regress trend lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       98
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -0.309            -4.044            -3.452            -3.151
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.9893
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x2t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+         x2t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17}-.0098037{col 28} .0316979{col 38}   -0.31{col 48} 0.758{col 58}-.0727406{col 70} .0531332
+{txt}{col 10}LD. {c |}{res}{col 17}-.0962592{col 28} .1055916{col 38}   -0.91{col 48} 0.364{col 58}-.3059137{col 70} .1133954
+      {txt}_trend{col 14}{c |}{res}{col 17} .0523166{col 28} .0725683{col 38}    0.72{col 48} 0.473{col 58}-.0917694{col 70} .1964027
+       {txt}_cons{col 14}{c |}{res}{col 17}-5.535267{col 28} 2.261499{col 38}   -2.45{col 48} 0.016{col 58}-10.02553{col 70}-1.045007
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x2t,  regress lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       98
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -2.004            -3.513            -2.892            -2.581
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.2847
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x2t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x2t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0299435{col 26}{space 2} .0149403{col 37}{space 1}   -2.00{col 46}{space 3}0.048{col 54}{space 4}-.0596037{col 67}{space 3}-.0002832
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}-.0734943{col 26}{space 2} .1005044{col 37}{space 1}   -0.73{col 46}{space 3}0.466{col 54}{space 4}-.2730208{col 67}{space 3} .1260322
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-5.599156{col 26}{space 2} 2.254043{col 37}{space 1}   -2.48{col 46}{space 3}0.015{col 54}{space 4}  -10.074{col 67}{space 3}-1.124316
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller x3t, regress trend lags(0)
+
+{txt}Dickey-Fuller test for unit root                   Number of obs   = {res}       99
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}   -11.018            -4.042            -3.451            -3.151
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x3t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+         x3t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17}-1.108826{col 28} .1006344{col 38}  -11.02{col 48} 0.000{col 58}-1.308584{col 70}-.9090682
+      {txt}_trend{col 14}{c |}{res}{col 17} .0703354{col 28} .0336109{col 38}    2.09{col 48} 0.039{col 58} .0036184{col 70} .1370524
+       {txt}_cons{col 14}{c |}{res}{col 17}-5.097098{col 28} 1.961097{col 38}   -2.60{col 48} 0.011{col 58}-8.989846{col 70}-1.204351
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x3t,  regress lags(0)
+
+{txt}Dickey-Fuller test for unit root                   Number of obs   = {res}       99
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}   -10.636            -3.511            -2.891            -2.580
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x3t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x3t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-1.065255{col 26}{space 2} .1001572{col 37}{space 1}  -10.64{col 46}{space 3}0.000{col 54}{space 4} -1.26404{col 67}{space 3} -.866471
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} -1.51032{col 26}{space 2} .9694074{col 37}{space 1}   -1.56{col 46}{space 3}0.122{col 54}{space 4}-3.434325{col 67}{space 3} .4136853
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller x4t, regress trend lags(6)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       93
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -3.530            -4.055            -3.457            -3.154
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.0363
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x4t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+         x4t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17}-1.110185{col 28} .3145104{col 38}   -3.53{col 48} 0.001{col 58}-1.735623{col 70}-.4847462
+{txt}{col 10}LD. {c |}{res}{col 17}  .022825{col 28} .2917026{col 38}    0.08{col 48} 0.938{col 58}-.5572576{col 70} .6029076
+        {txt}L2D. {c |}{res}{col 17} .0309258{col 28} .2610137{col 38}    0.12{col 48} 0.906{col 58}-.4881286{col 70} .5499802
+        {txt}L3D. {c |}{res}{col 17} .0520696{col 28} .2317056{col 38}    0.22{col 48} 0.823{col 58}-.4087024{col 70} .5128416
+        {txt}L4D. {c |}{res}{col 17} -.001094{col 28} .2010016{col 38}   -0.01{col 48} 0.996{col 58}-.4008077{col 70} .3986196
+        {txt}L5D. {c |}{res}{col 17} -.104476{col 28} .1618605{col 38}   -0.65{col 48} 0.520{col 58}-.4263534{col 70} .2174014
+        {txt}L6D. {c |}{res}{col 17} .0292662{col 28} .1086823{col 38}    0.27{col 48} 0.788{col 58}-.1868604{col 70} .2453928
+      {txt}_trend{col 14}{c |}{res}{col 17} .6229644{col 28} .1808771{col 38}    3.44{col 48} 0.001{col 58} .2632704{col 70} .9826583
+       {txt}_cons{col 14}{c |}{res}{col 17}-4.453849{col 28} 3.031648{col 38}   -1.47{col 48} 0.146{col 58}-10.48261{col 70} 1.574915
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x4t,  regress lags(6)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       93
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -0.729            -3.520            -2.896            -2.583
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.8391
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x4t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x4t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0509056{col 26}{space 2} .0698263{col 37}{space 1}   -0.73{col 46}{space 3}0.468{col 54}{space 4} -.189739{col 67}{space 3} .0879279
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}-.8999252{col 26}{space 2} .1225165{col 37}{space 1}   -7.35{col 46}{space 3}0.000{col 54}{space 4}-1.143521{col 67}{space 3}-.6563294
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.7265885{col 26}{space 2} .1492555{col 37}{space 1}   -4.87{col 46}{space 3}0.000{col 54}{space 4}-1.023349{col 67}{space 3}-.4298285
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.5542449{col 26}{space 2} .1599899{col 37}{space 1}   -3.46{col 46}{space 3}0.001{col 54}{space 4}-.8723476{col 67}{space 3}-.2361422
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2}-.4655119{col 26}{space 2}  .158298{col 37}{space 1}   -2.94{col 46}{space 3}0.004{col 54}{space 4}-.7802507{col 67}{space 3}-.1507732
+{txt}{space 8}L5D. {c |}{col 14}{res}{space 2}-.4142856{col 26}{space 2} .1429028{col 37}{space 1}   -2.90{col 46}{space 3}0.005{col 54}{space 4}-.6984147{col 67}{space 3}-.1301565
+{txt}{space 8}L6D. {c |}{col 14}{res}{space 2}-.1091785{col 26}{space 2} .1072332{col 37}{space 1}   -1.02{col 46}{space 3}0.312{col 54}{space 4}-.3223867{col 67}{space 3} .1040298
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 3.719279{col 26}{space 2} 2.003581{col 37}{space 1}    1.86{col 46}{space 3}0.067{col 54}{space 4}-.2643763{col 67}{space 3} 7.702935
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller x5t, regress trend lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       98
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}     1.101            -4.044            -3.452            -3.151
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}1.0000
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x5t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+         x5t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17} .0062547{col 28} .0056816{col 38}    1.10{col 48} 0.274{col 58}-.0050262{col 70} .0175355
+{txt}{col 10}LD. {c |}{res}{col 17}-.1218633{col 28}   .10307{col 38}   -1.18{col 48} 0.240{col 58}-.3265111{col 70} .0827846
+      {txt}_trend{col 14}{c |}{res}{col 17} .4078324{col 28} .1122271{col 38}    3.63{col 48} 0.000{col 58}  .185003{col 70} .6306619
+       {txt}_cons{col 14}{c |}{res}{col 17}-2.676803{col 28} 2.921522{col 38}   -0.92{col 48} 0.362{col 58}-8.477554{col 70} 3.123948
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x5t,  regress lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       98
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}     7.717            -3.513            -2.892            -2.581
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}1.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x5t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x5t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0239601{col 26}{space 2} .0031048{col 37}{space 1}    7.72{col 46}{space 3}0.000{col 54}{space 4} .0177963{col 67}{space 3} .0301238
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}-.0168428{col 26}{space 2} .1050993{col 37}{space 1}   -0.16{col 46}{space 3}0.873{col 54}{space 4}-.2254913{col 67}{space 3} .1918057
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 6.536399{col 26}{space 2} 1.542216{col 37}{space 1}    4.24{col 46}{space 3}0.000{col 54}{space 4} 3.474714{col 67}{space 3} 9.598084
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller x6t, regress trend lags(10)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       89
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -0.023            -4.064            -3.461            -3.157
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.9940
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x6t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+         x6t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17}-.0002153{col 28} .0093444{col 38}   -0.02{col 48} 0.982{col 58}-.0188264{col 70} .0183958
+{txt}{col 10}LD. {c |}{res}{col 17}-.8922658{col 28}  .110584{col 38}   -8.07{col 48} 0.000{col 58}-1.112513{col 70}-.6720187
+        {txt}L2D. {c |}{res}{col 17} -.751545{col 28}  .150557{col 38}   -4.99{col 48} 0.000{col 58}-1.051405{col 70}-.4516847
+        {txt}L3D. {c |}{res}{col 17}-.5762522{col 28}  .172316{col 38}   -3.34{col 48} 0.001{col 58}-.9194493{col 70}-.2330552
+        {txt}L4D. {c |}{res}{col 17}-.4881828{col 28} .1833846{col 38}   -2.66{col 48} 0.009{col 58}-.8534249{col 70}-.1229406
+        {txt}L5D. {c |}{res}{col 17}-.5206725{col 28} .1891668{col 38}   -2.75{col 48} 0.007{col 58}-.8974308{col 70}-.1439141
+        {txt}L6D. {c |}{res}{col 17}-.2273674{col 28}  .190225{col 38}   -1.20{col 48} 0.236{col 58}-.6062333{col 70} .1514985
+        {txt}L7D. {c |}{res}{col 17}-.1522003{col 28} .1853184{col 38}   -0.82{col 48} 0.414{col 58}-.5212939{col 70} .2168932
+        {txt}L8D. {c |}{res}{col 17} -.082482{col 28} .1732318{col 38}   -0.48{col 48} 0.635{col 58}-.4275031{col 70} .2625391
+        {txt}L9D. {c |}{res}{col 17} -.122574{col 28} .1517557{col 38}   -0.81{col 48} 0.422{col 58}-.4248217{col 70} .1796738
+       {txt}L10D. {c |}{res}{col 17}-.2702678{col 28} .1108496{col 38}   -2.44{col 48} 0.017{col 58} -.491044{col 70}-.0494916
+      {txt}_trend{col 14}{c |}{res}{col 17} -2.02643{col 28} .4987403{col 38}   -4.06{col 48} 0.000{col 58}-3.019757{col 70}-1.033103
+       {txt}_cons{col 14}{c |}{res}{col 17} 5.973368{col 28} 5.787153{col 38}    1.03{col 48} 0.305{col 58}-5.552746{col 70} 17.49948
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x6t,  regress lags(10)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       89
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}     1.552            -3.525            -2.899            -2.584
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.9977
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x6t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x6t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0146286{col 26}{space 2} .0094271{col 37}{space 1}    1.55{col 46}{space 3}0.125{col 54}{space 4}-.0041432{col 67}{space 3} .0334004
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}-.7514416{col 26}{space 2} .1151027{col 37}{space 1}   -6.53{col 46}{space 3}0.000{col 54}{space 4}-.9806404{col 67}{space 3}-.5222428
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.4444049{col 26}{space 2} .1427156{col 37}{space 1}   -3.11{col 46}{space 3}0.003{col 54}{space 4}-.7285881{col 67}{space 3}-.1602218
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.1271997{col 26}{space 2} .1449086{col 37}{space 1}   -0.88{col 46}{space 3}0.383{col 54}{space 4}-.4157496{col 67}{space 3} .1613502
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2} .0584575{col 26}{space 2} .1365918{col 37}{space 1}    0.43{col 46}{space 3}0.670{col 54}{space 4}-.2135315{col 67}{space 3} .3304465
+{txt}{space 8}L5D. {c |}{col 14}{res}{space 2}  .088712{col 26}{space 2} .1263596{col 37}{space 1}    0.70{col 46}{space 3}0.485{col 54}{space 4}-.1629022{col 67}{space 3} .3403262
+{txt}{space 8}L6D. {c |}{col 14}{res}{space 2} .3915079{col 26}{space 2} .1249029{col 37}{space 1}    3.13{col 46}{space 3}0.002{col 54}{space 4} .1427944{col 67}{space 3} .6402213
+{txt}{space 8}L7D. {c |}{col 14}{res}{space 2} .4196838{col 26}{space 2} .1321327{col 37}{space 1}    3.18{col 46}{space 3}0.002{col 54}{space 4} .1565739{col 67}{space 3} .6827937
+{txt}{space 8}L8D. {c |}{col 14}{res}{space 2} .3944015{col 26}{space 2} .1396544{col 37}{space 1}    2.82{col 46}{space 3}0.006{col 54}{space 4} .1163142{col 67}{space 3} .6724889
+{txt}{space 8}L9D. {c |}{col 14}{res}{space 2} .2137914{col 26}{space 2} .1394076{col 37}{space 1}    1.53{col 46}{space 3}0.129{col 54}{space 4}-.0638047{col 67}{space 3} .4913875
+{txt}{space 7}L10D. {c |}{col 14}{res}{space 2}-.1052594{col 26}{space 2} .1130533{col 37}{space 1}   -0.93{col 46}{space 3}0.355{col 54}{space 4}-.3303772{col 67}{space 3} .1198585
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-11.51892{col 26}{space 2} 4.239008{col 37}{space 1}   -2.72{col 46}{space 3}0.008{col 54}{space 4}-19.95986{col 67}{space 3}-3.077974
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller x7t, regress trend lags(2)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       97
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -0.230            -4.047            -3.453            -3.152
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.9910
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x7t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+         x7t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17} -.005158{col 28} .0224688{col 38}   -0.23{col 48} 0.819{col 58} -.049783{col 70} .0394671
+{txt}{col 10}LD. {c |}{res}{col 17} .3780867{col 28} .1043631{col 38}    3.62{col 48} 0.000{col 58} .1708125{col 70}  .585361
+        {txt}L2D. {c |}{res}{col 17}-.1411494{col 28} .1053936{col 38}   -1.34{col 48} 0.184{col 58}-.3504701{col 70} .0681713
+      {txt}_trend{col 14}{c |}{res}{col 17} .1191714{col 28} .1582511{col 38}    0.75{col 48} 0.453{col 58}-.1951289{col 70} .4334717
+       {txt}_cons{col 14}{c |}{res}{col 17}-11.43742{col 28} 4.839166{col 38}   -2.36{col 48} 0.020{col 58}-21.04843{col 70}-1.826422
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x7t,  regress lags(2)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       97
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -1.944            -3.514            -2.892            -2.581
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.3115
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x7t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x7t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0201596{col 26}{space 2} .0103681{col 37}{space 1}   -1.94{col 46}{space 3}0.055{col 54}{space 4}-.0407485{col 67}{space 3} .0004293
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2} .3952935{col 26}{space 2} .1015938{col 37}{space 1}    3.89{col 46}{space 3}0.000{col 54}{space 4} .1935484{col 67}{space 3} .5970387
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.1193842{col 26}{space 2} .1011168{col 37}{space 1}   -1.18{col 46}{space 3}0.241{col 54}{space 4}-.3201822{col 67}{space 3} .0814138
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-11.41749{col 26}{space 2} 4.827818{col 37}{space 1}   -2.36{col 46}{space 3}0.020{col 54}{space 4}-21.00458{col 67}{space 3}-1.830402
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller x8t, regress trend lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       98
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -0.321            -4.044            -3.452            -3.151
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.9890
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x8t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+         x8t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17}-.0101569{col 28} .0316424{col 38}   -0.32{col 48} 0.749{col 58}-.0729836{col 70} .0526699
+{txt}{col 10}LD. {c |}{res}{col 17}-.0943836{col 28} .1054572{col 38}   -0.89{col 48} 0.373{col 58}-.3037713{col 70}  .115004
+      {txt}_trend{col 14}{c |}{res}{col 17} .1039812{col 28} .1451807{col 38}    0.72{col 48} 0.476{col 58}-.1842784{col 70} .3922408
+       {txt}_cons{col 14}{c |}{res}{col 17}-11.18482{col 28} 4.591827{col 38}   -2.44{col 48} 0.017{col 58}  -20.302{col 70}-2.067639
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x8t,  regress lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       98
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -2.014            -3.513            -2.892            -2.581
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.2807
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x8t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x8t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0301138{col 26}{space 2} .0149556{col 37}{space 1}   -2.01{col 46}{space 3}0.047{col 54}{space 4}-.0598044{col 67}{space 3}-.0004232
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}-.0717629{col 26}{space 2} .1003583{col 37}{space 1}   -0.72{col 46}{space 3}0.476{col 54}{space 4}-.2709993{col 67}{space 3} .1274735
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-11.37222{col 26}{space 2}   4.5726{col 37}{space 1}   -2.49{col 46}{space 3}0.015{col 54}{space 4}-20.44998{col 67}{space 3}-2.294458
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller x9t, regress trend lags(6)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       93
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -3.530            -4.055            -3.457            -3.154
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.0363
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x9t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+         x9t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17}-1.110185{col 28} .3145104{col 38}   -3.53{col 48} 0.001{col 58}-1.735623{col 70}-.4847463
+{txt}{col 10}LD. {c |}{res}{col 17}  .022825{col 28} .2917026{col 38}    0.08{col 48} 0.938{col 58}-.5572576{col 70} .6029076
+        {txt}L2D. {c |}{res}{col 17} .0309258{col 28} .2610137{col 38}    0.12{col 48} 0.906{col 58}-.4881286{col 70} .5499802
+        {txt}L3D. {c |}{res}{col 17} .0520696{col 28} .2317056{col 38}    0.22{col 48} 0.823{col 58}-.4087024{col 70} .5128416
+        {txt}L4D. {c |}{res}{col 17}-.0010941{col 28} .2010016{col 38}   -0.01{col 48} 0.996{col 58}-.4008077{col 70} .3986196
+        {txt}L5D. {c |}{res}{col 17} -.104476{col 28} .1618605{col 38}   -0.65{col 48} 0.520{col 58}-.4263534{col 70} .2174014
+        {txt}L6D. {c |}{res}{col 17} .0292662{col 28} .1086823{col 38}    0.27{col 48} 0.788{col 58}-.1868604{col 70} .2453928
+      {txt}_trend{col 14}{c |}{res}{col 17} .5119459{col 28} .1502649{col 38}    3.41{col 48} 0.001{col 58} .2131276{col 70} .8107642
+       {txt}_cons{col 14}{c |}{res}{col 17}-4.550897{col 28} 2.962556{col 38}   -1.54{col 48} 0.128{col 58}-10.44226{col 70}  1.34047
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x9t,  regress lags(6)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       93
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -0.871            -3.520            -2.896            -2.583
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.7972
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.x9t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}x9t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0731451{col 26}{space 2} .0839397{col 37}{space 1}   -0.87{col 46}{space 3}0.386{col 54}{space 4}-.2400397{col 67}{space 3} .0937494
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}-.8808066{col 26}{space 2} .1287729{col 37}{space 1}   -6.84{col 46}{space 3}0.000{col 54}{space 4}-1.136842{col 67}{space 3}-.6247715
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.7111132{col 26}{space 2} .1525544{col 37}{space 1}   -4.66{col 46}{space 3}0.000{col 54}{space 4}-1.014432{col 67}{space 3}-.4077942
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.5420795{col 26}{space 2} .1617994{col 37}{space 1}   -3.35{col 46}{space 3}0.001{col 54}{space 4}-.8637801{col 67}{space 3}-.2203789
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2}-.4565501{col 26}{space 2} .1591909{col 37}{space 1}   -2.87{col 46}{space 3}0.005{col 54}{space 4}-.7730643{col 67}{space 3}-.1400359
+{txt}{space 8}L5D. {c |}{col 14}{res}{space 2}-.4085373{col 26}{space 2} .1432103{col 37}{space 1}   -2.85{col 46}{space 3}0.005{col 54}{space 4}-.6932778{col 67}{space 3}-.1237968
+{txt}{space 8}L6D. {c |}{col 14}{res}{space 2}-.1069341{col 26}{space 2} .1071832{col 37}{space 1}   -1.00{col 46}{space 3}0.321{col 54}{space 4}-.3200431{col 67}{space 3} .1061749
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 3.444523{col 26}{space 2} 1.917623{col 37}{space 1}    1.80{col 46}{space 3}0.076{col 54}{space 4}-.3682258{col 67}{space 3} 7.257272
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller x10t, regress trend lags(9)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       90
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}     0.842            -4.062            -3.460            -3.156
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}1.0000
+
+{txt}{hline 13}{c TT}{hline 64}
+D.x10t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+        x10t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17} .0198879{col 28} .0236116{col 38}    0.84{col 48} 0.402{col 58}-.0271192{col 70} .0668949
+{txt}{col 10}LD. {c |}{res}{col 17} .1817585{col 28} .1177366{col 38}    1.54{col 48} 0.127{col 58}-.0526371{col 70}  .416154
+        {txt}L2D. {c |}{res}{col 17} .5869634{col 28} .1078657{col 38}    5.44{col 48} 0.000{col 58} .3722194{col 70} .8017075
+        {txt}L3D. {c |}{res}{col 17}-.2826926{col 28} .1247321{col 38}   -2.27{col 48} 0.026{col 58}-.5310152{col 70}-.0343701
+        {txt}L4D. {c |}{res}{col 17}-.3961417{col 28} .1248059{col 38}   -3.17{col 48} 0.002{col 58}-.6446113{col 70}-.1476722
+        {txt}L5D. {c |}{res}{col 17} .1150026{col 28} .1327674{col 38}    0.87{col 48} 0.389{col 58}-.1493169{col 70} .3793222
+        {txt}L6D. {c |}{res}{col 17} .3707946{col 28} .1232989{col 38}    3.01{col 48} 0.004{col 58} .1253254{col 70} .6162638
+        {txt}L7D. {c |}{res}{col 17}-.2299481{col 28} .1281776{col 38}   -1.79{col 48} 0.077{col 58}  -.48513{col 70} .0252338
+        {txt}L8D. {c |}{res}{col 17}-.3416317{col 28} .1065929{col 38}   -3.21{col 48} 0.002{col 58}-.5538417{col 70}-.1294216
+        {txt}L9D. {c |}{res}{col 17} .0380441{col 28} .1116305{col 38}    0.34{col 48} 0.734{col 58}-.1841951{col 70} .2602833
+      {txt}_trend{col 14}{c |}{res}{col 17}  .608999{col 28} .3769005{col 38}    1.62{col 48} 0.110{col 58}-.1413521{col 70}  1.35935
+       {txt}_cons{col 14}{c |}{res}{col 17}  -24.176{col 28} 9.286518{col 38}   -2.60{col 48} 0.011{col 58}-42.66404{col 70}-5.687961
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfuller x10t,  regress lags(9)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       90
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -1.792            -3.524            -2.898            -2.584
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.3843
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      D.x10t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}x10t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0156245{col 26}{space 2} .0087172{col 37}{space 1}   -1.79{col 46}{space 3}0.077{col 54}{space 4}-.0329756{col 67}{space 3} .0017267
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}  .251318{col 26}{space 2} .1106956{col 37}{space 1}    2.27{col 46}{space 3}0.026{col 54}{space 4}  .030984{col 67}{space 3} .4716521
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}  .622452{col 26}{space 2} .1066772{col 37}{space 1}    5.83{col 46}{space 3}0.000{col 54}{space 4} .4101164{col 67}{space 3} .8347876
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.2765293{col 26}{space 2} .1259384{col 37}{space 1}   -2.20{col 46}{space 3}0.031{col 54}{space 4}-.5272035{col 67}{space 3}-.0258552
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2}-.3522395{col 26}{space 2} .1230482{col 37}{space 1}   -2.86{col 46}{space 3}0.005{col 54}{space 4}-.5971607{col 67}{space 3}-.1073182
+{txt}{space 8}L5D. {c |}{col 14}{res}{space 2} .1806382{col 26}{space 2} .1276828{col 37}{space 1}    1.41{col 46}{space 3}0.161{col 54}{space 4}-.0735081{col 67}{space 3} .4347845
+{txt}{space 8}L6D. {c |}{col 14}{res}{space 2} .3993844{col 26}{space 2} .1232605{col 37}{space 1}    3.24{col 46}{space 3}0.002{col 54}{space 4} .1540405{col 67}{space 3} .6447282
+{txt}{space 8}L7D. {c |}{col 14}{res}{space 2}-.2215839{col 26}{space 2} .1293721{col 37}{space 1}   -1.71{col 46}{space 3}0.091{col 54}{space 4}-.4790927{col 67}{space 3} .0359249
+{txt}{space 8}L8D. {c |}{col 14}{res}{space 2}-.2912101{col 26}{space 2} .1029568{col 37}{space 1}   -2.83{col 46}{space 3}0.006{col 54}{space 4}-.4961404{col 67}{space 3}-.0862797
+{txt}{space 8}L9D. {c |}{col 14}{res}{space 2} .1032906{col 26}{space 2} .1051269{col 37}{space 1}    0.98{col 46}{space 3}0.329{col 54}{space 4}-.1059592{col 67}{space 3} .3125404
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-18.39841{col 26}{space 2}  8.65747{col 37}{space 1}   -2.13{col 46}{space 3}0.037{col 54}{space 4}-35.63067{col 67}{space 3}-1.166144
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. 
+.  foreach var of varlist x*{c -(}
+{txt}  2{com}. *PART 2: (GLS-Augmented Dicky Fuller test)*
+. dfgls `var'
+{txt}  3{com}. 
+. /**PART 3: Exponential trends**
+> dis "Using log values, we can check if log of `var' is stationary "
+> gen ln`var' = ln(`var')
+> dfuller ln`var', trend*/
+. {c )-}
+ 
+{txt}DF-GLS for {res}x1t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -1.017{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -0.623{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -0.457{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -0.830{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -1.014{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -0.980{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -0.935{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -0.548{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -0.664{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -0.715{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -0.542{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -0.528{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}12{col 22}{txt} with RMSE {res} 8.508436
+{txt}Min SC   = {res} 4.627715{txt} at lag {res} 1{txt} with RMSE {res} 9.607318
+{txt}Min MAIC = {res} 4.554893{txt} at lag {res} 1{txt} with RMSE {res} 9.607318
+ 
+{txt}DF-GLS for {res}x2t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -1.017{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -0.623{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -0.457{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -0.830{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -1.014{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -0.980{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -0.935{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -0.548{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -0.664{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -0.715{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -0.542{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -0.528{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}12{col 22}{txt} with RMSE {res} 8.508435
+{txt}Min SC   = {res} 4.627715{txt} at lag {res} 1{txt} with RMSE {res} 9.607317
+{txt}Min MAIC = {res} 4.554893{txt} at lag {res} 1{txt} with RMSE {res} 9.607317
+ 
+{txt}DF-GLS for {res}x3t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -2.608{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -2.786{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -3.189{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -3.725{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -3.320{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -3.216{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -3.392{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -3.577{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -4.442{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -4.651{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -5.136{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -6.795{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}11{col 22}{txt} with RMSE {res} 8.413303
+{txt}Min SC   = {res} 4.627797{txt} at lag {res} 1{txt} with RMSE {res} 9.607711
+{txt}Min MAIC = {res} 5.602521{txt} at lag {res}12{txt} with RMSE {res} 8.315217
+ 
+{txt}DF-GLS for {res}x4t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -2.608{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -2.786{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -3.189{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -3.725{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -3.320{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -3.216{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -3.392{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -3.577{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -4.442{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -4.651{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -5.136{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -6.795{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}11{col 22}{txt} with RMSE {res} 8.413303
+{txt}Min SC   = {res} 4.627797{txt} at lag {res} 1{txt} with RMSE {res} 9.607711
+{txt}Min MAIC = {res} 5.602521{txt} at lag {res}12{txt} with RMSE {res} 8.315217
+ 
+{txt}DF-GLS for {res}x5t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -2.235{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -1.613{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -1.272{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -1.484{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -1.538{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -1.380{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -1.177{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -0.635{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -0.478{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -0.259{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}     0.203{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}     0.808{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}12{col 22}{txt} with RMSE {res}  8.81921
+{txt}Min SC   = {res} 4.955714{txt} at lag {res} 6{txt} with RMSE {res} 9.956187
+{txt}Min MAIC = {res} 4.776433{txt} at lag {res} 6{txt} with RMSE {res} 9.956187
+ 
+{txt}DF-GLS for {res}x6t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -1.712{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -1.617{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -1.967{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -2.497{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -1.973{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -1.487{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -1.142{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -0.619{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -0.425{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}     0.089{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}     0.745{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}     1.384{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res} 9{col 22}{txt} with RMSE {res} 11.34343
+{txt}Min SC   = {res} 5.370601{txt} at lag {res} 9{txt} with RMSE {res} 11.34343
+{txt}Min MAIC = {res} 5.169076{txt} at lag {res}11{txt} with RMSE {res}  11.0626
+ 
+{txt}DF-GLS for {res}x7t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -1.069{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -0.757{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -0.335{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -0.438{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -0.824{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -0.836{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -0.934{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -0.606{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -0.411{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -0.647{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -0.391{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -0.609{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}12{col 22}{txt} with RMSE {res} 16.83834
+{txt}Min SC   = {res} 6.055008{txt} at lag {res} 1{txt} with RMSE {res} 19.61259
+{txt}Min MAIC = {res} 5.970424{txt} at lag {res}12{txt} with RMSE {res} 16.83834
+ 
+{txt}DF-GLS for {res}x8t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -0.920{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -0.526{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -0.357{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -0.733{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -0.918{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -0.884{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -0.840{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -0.458{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -0.573{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -0.623{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -0.451{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -0.436{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}12{col 22}{txt} with RMSE {res} 17.01205
+{txt}Min SC   = {res} 6.016083{txt} at lag {res} 1{txt} with RMSE {res} 19.23457
+{txt}Min MAIC = {res} 5.941082{txt} at lag {res} 1{txt} with RMSE {res} 19.23457
+ 
+{txt}DF-GLS for {res}x9t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -2.608{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -2.786{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -3.189{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -3.725{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -3.320{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -3.216{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -3.392{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -3.577{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -4.442{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -4.651{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -5.136{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -6.795{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}11{col 22}{txt} with RMSE {res} 8.413303
+{txt}Min SC   = {res} 4.627797{txt} at lag {res} 1{txt} with RMSE {res} 9.607711
+{txt}Min MAIC = {res} 5.602521{txt} at lag {res}12{txt} with RMSE {res} 8.315217
+ 
+{txt}DF-GLS for {res}x10t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -1.157{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -0.832{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -0.566{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -0.467{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -0.296{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -0.664{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -1.125{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -0.765{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -0.399{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -0.519{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -1.000{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -0.260{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}12{col 22}{txt} with RMSE {res} 26.02755
+{txt}Min SC   = {res} 7.023501{txt} at lag {res} 3{txt} with RMSE {res}  30.2376
+{txt}Min MAIC = {res} 6.825646{txt} at lag {res} 8{txt} with RMSE {res} 27.64055
+ 
+{txt}DF-GLS for {res}x4t_trendless{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -2.608{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -2.786{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -3.189{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -3.725{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -3.320{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -3.216{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -3.392{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -3.577{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -4.442{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -4.651{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -5.136{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -6.795{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}11{col 22}{txt} with RMSE {res} 8.413303
+{txt}Min SC   = {res} 4.627797{txt} at lag {res} 1{txt} with RMSE {res} 9.607711
+{txt}Min MAIC = {res} 5.602521{txt} at lag {res}12{txt} with RMSE {res} 8.315217
+{txt}
+{com}. 
+. **Further study of x5t and x6t**
+. 
+. dis "Using log values, we can detrend these Series and turn them stationary"
+{res}Using log values, we can detrend these Series and turn them stationary
+{txt}
+{com}. gen ln_x5t = ln(x5t) 
+{txt}(12 missing values generated)
+
+{com}. gen ln_x6t = ln(x6t*(-1))
+{txt}
+{com}. varsoc x5t, maxlag(10)
+
+{txt}{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-695.786{col 18}{col 27}{col 32}{col 39}  310599{col 48}{space 1} 15.4841{col 58}{space 1} 15.4953{col 68}{space 1} 15.5119{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-332.588{col 18}{space 1}  726.4{col 26}*{col 27}   1{col 32} 0.000{col 39} 99.2272{col 47}*{col 48}{space 1} 7.43528{col 57}*{col 58}{space 1} 7.45768{col 67}*{col 68}{space 1} 7.49083{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-332.409{col 18}{space 1} .35761{col 27}   1{col 32} 0.550{col 39} 101.056{col 48}{space 1} 7.45353{col 58}{space 1} 7.48713{col 68}{space 1} 7.53686{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-332.392{col 18}{space 1} .03385{col 27}   1{col 32} 0.854{col 39} 103.292{col 48}{space 1} 7.47538{col 58}{space 1} 7.52018{col 68}{space 1} 7.58648{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-332.176{col 18}{space 1} .43115{col 27}   1{col 32} 0.511{col 39} 105.114{col 48}{space 1} 7.49281{col 58}{space 1} 7.54881{col 68}{space 1} 7.63169{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-332.169{col 18}{space 1} .01511{col 27}   1{col 32} 0.902{col 39} 107.467{col 48}{space 1} 7.51486{col 58}{space 1} 7.58207{col 68}{space 1} 7.68152{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-331.779{col 18}{space 1} .77951{col 27}   1{col 32} 0.377{col 39} 108.947{col 48}{space 1} 7.52842{col 58}{space 1} 7.60683{col 68}{space 1} 7.72285{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-330.375{col 18}{space 1} 2.8084{col 27}   1{col 32} 0.094{col 39}  107.99{col 48}{space 1} 7.51944{col 58}{space 1} 7.60905{col 68}{space 1} 7.74165{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-330.343{col 18}{space 1} .06441{col 27}   1{col 32} 0.800{col 39} 110.359{col 48}{space 1} 7.54095{col 58}{space 1} 7.64175{col 68}{space 1} 7.79093{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-330.342{col 18}{space 1} .00064{col 27}   1{col 32} 0.980{col 39} 112.867{col 48}{space 1} 7.56316{col 58}{space 1} 7.67517{col 68}{space 1} 7.84092{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-329.801{col 18}{space 1} 1.0822{col 27}   1{col 32} 0.298{col 39} 114.059{col 48}{space 1} 7.57336{col 58}{space 1} 7.69657{col 68}{space 1} 7.87889{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x5t
+{space 3} Exogenous:  _cons
+
+{com}. dfuller ln_x5t,  regress lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       86
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -5.265            -3.530            -2.901            -2.586
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    D.ln_x5t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}ln_x5t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0835753{col 26}{space 2}  .015874{col 37}{space 1}   -5.26{col 46}{space 3}0.000{col 54}{space 4} -.115148{col 67}{space 3}-.0520026
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}-.1285976{col 26}{space 2} .0827119{col 37}{space 1}   -1.55{col 46}{space 3}0.124{col 54}{space 4}-.2931083{col 67}{space 3}  .035913
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}  .569746{col 26}{space 2} .0947443{col 37}{space 1}    6.01{col 46}{space 3}0.000{col 54}{space 4} .3813033{col 67}{space 3} .7581886
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller ln_x5t, trend regress lags(1)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       86
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -8.198            -4.071            -3.464            -3.158
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 64}
+D.ln_x5t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+      ln_x5t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17}-.3313746{col 28} .0404228{col 38}   -8.20{col 48} 0.000{col 58}-.4117883{col 70}-.2509608
+{txt}{col 10}LD. {c |}{res}{col 17}-.0217552{col 28} .0696779{col 38}   -0.31{col 48} 0.756{col 58}-.1603667{col 70} .1168562
+      {txt}_trend{col 14}{c |}{res}{col 17}  .015212{col 28} .0023498{col 38}    6.47{col 48} 0.000{col 58} .0105374{col 70} .0198866
+       {txt}_cons{col 14}{c |}{res}{col 17}  1.31215{col 28} .1384361{col 38}    9.48{col 48} 0.000{col 58} 1.036757{col 70} 1.587544
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfgls ln_x5t
+ 
+{txt}DF-GLS for {res}ln_x5t{col 58}{txt}Number of obs = {res}   76
+{txt}Maxlag = {res}11{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}11{col 14}{res}    -1.161{col 31}    -3.626{col 49}    -2.755{col 67}    -2.481
+{txt}{col 5}10{col 14}{res}    -0.642{col 31}    -3.626{col 49}    -2.791{col 67}    -2.516
+{txt}{col 5}9{col 14}{res}    -0.833{col 31}    -3.626{col 49}    -2.827{col 67}    -2.550
+{txt}{col 5}8{col 14}{res}    -0.969{col 31}    -3.626{col 49}    -2.863{col 67}    -2.584
+{txt}{col 5}7{col 14}{res}    -1.185{col 31}    -3.626{col 49}    -2.897{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -1.446{col 31}    -3.626{col 49}    -2.930{col 67}    -2.648
+{txt}{col 5}5{col 14}{res}    -0.653{col 31}    -3.626{col 49}    -2.962{col 67}    -2.677
+{txt}{col 5}4{col 14}{res}    -0.064{col 31}    -3.626{col 49}    -2.992{col 67}    -2.705
+{txt}{col 5}3{col 14}{res}    -0.314{col 31}    -3.626{col 49}    -3.019{col 67}    -2.730
+{txt}{col 5}2{col 14}{res}     0.011{col 31}    -3.626{col 49}    -3.044{col 67}    -2.752
+{txt}{col 5}1{col 14}{res}     0.056{col 31}    -3.626{col 49}    -3.066{col 67}    -2.772
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}11{col 22}{txt} with RMSE {res} .0343502
+{txt}Min SC   = {res}-6.058496{txt} at lag {res}11{txt} with RMSE {res} .0343502
+{txt}Min MAIC = {res}-6.401335{txt} at lag {res}11{txt} with RMSE {res} .0343502
+{txt}
+{com}. 
+. varsoc x6t, maxlag(10)
+
+{txt}{col 4}Selection-order criteria
+{col 4}Sample:  {res}11 - 100 {txt}{col 49}Number of obs {col 68}= {res}       90
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-700.723{col 18}{col 27}{col 32}{col 39}  346618{col 48}{space 1} 15.5939{col 58}{space 1} 15.6051{col 68}{space 1} 15.6216{col 79}{text}{c |}
+{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-367.878{col 18}{space 1} 665.69{col 27}   1{col 32} 0.000{col 39} 217.379{col 48}{space 1} 8.21951{col 58}{space 1} 8.24191{col 68}{space 1} 8.27506{col 79}{text}{c |}
+{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1} -354.32{col 18}{space 1} 27.116{col 27}   1{col 32} 0.000{col 39} 164.447{col 48}{space 1} 7.94044{col 58}{space 1} 7.97404{col 68}{space 1} 8.02377{col 79}{text}{c |}
+{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-350.553{col 18}{space 1} 7.5342{col 27}   1{col 32} 0.006{col 39} 154.645{col 48}{space 1} 7.87895{col 58}{space 1} 7.92375{col 68}{space 1} 7.99005{col 77}*{col 79}{text}{c |}
+{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1} -350.47{col 18}{space 1} .16526{col 27}   1{col 32} 0.684{col 39} 157.839{col 48}{space 1} 7.89934{col 58}{space 1} 7.95534{col 68}{space 1} 8.03821{col 79}{text}{c |}
+{col 3}{text}{c |}  5{col 8}{c |}{result}{space 1}-350.051{col 18}{space 1} .83856{col 27}   1{col 32} 0.360{col 39} 159.902{col 48}{space 1} 7.91224{col 58}{space 1} 7.97945{col 68}{space 1} 8.07889{col 79}{text}{c |}
+{col 3}{text}{c |}  6{col 8}{c |}{result}{space 1}-349.811{col 18}{space 1} .47879{col 27}   1{col 32} 0.489{col 39} 162.647{col 48}{space 1} 7.92914{col 58}{space 1} 8.00755{col 68}{space 1} 8.12357{col 79}{text}{c |}
+{col 3}{text}{c |}  7{col 8}{c |}{result}{space 1}-347.942{col 18}{space 1}  3.739{col 27}   1{col 32} 0.053{col 39} 159.559{col 48}{space 1} 7.90982{col 58}{space 1} 7.99943{col 68}{space 1} 8.13203{col 79}{text}{c |}
+{col 3}{text}{c |}  8{col 8}{c |}{result}{space 1}-346.374{col 18}{space 1} 3.1351{col 27}   1{col 32} 0.077{col 39} 157.591{col 48}{space 1} 7.89721{col 58}{space 1} 7.99802{col 68}{space 1} 8.14719{col 79}{text}{c |}
+{col 3}{text}{c |}  9{col 8}{c |}{result}{space 1}-343.839{col 18}{space 1} 5.0709{col 27}   1{col 32} 0.024{col 39} 152.343{col 48}{space 1} 7.86309{col 58}{space 1}  7.9751{col 68}{space 1} 8.14084{col 79}{text}{c |}
+{col 3}{text}{c |} 10{col 8}{c |}{result}{space 1}-339.306{col 18}{space 1}  9.065{col 26}*{col 27}   1{col 32} 0.003{col 39} 140.884{col 47}*{col 48}{space 1} 7.78459{col 57}*{col 58}{space 1}  7.9078{col 67}*{col 68}{space 1} 8.09012{col 79}{text}{c |}
+{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{space 3}Endogenous:  x6t
+{space 3} Exogenous:  _cons
+
+{com}. dfuller ln_x6t,  regress lags(10)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       89
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -4.900            -3.525            -2.899            -2.584
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    D.ln_x6t{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}ln_x6t {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} -.085746{col 26}{space 2} .0175009{col 37}{space 1}   -4.90{col 46}{space 3}0.000{col 54}{space 4}-.1205948{col 67}{space 3}-.0508972
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2} -.543958{col 26}{space 2} .0910623{col 37}{space 1}   -5.97{col 46}{space 3}0.000{col 54}{space 4}-.7252863{col 67}{space 3}-.3626297
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.4171046{col 26}{space 2} .1091429{col 37}{space 1}   -3.82{col 46}{space 3}0.000{col 54}{space 4} -.634436{col 67}{space 3}-.1997733
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .0988037{col 26}{space 2} .1078903{col 37}{space 1}    0.92{col 46}{space 3}0.363{col 54}{space 4}-.1160333{col 67}{space 3} .3136407
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2} .1981809{col 26}{space 2} .0868626{col 37}{space 1}    2.28{col 46}{space 3}0.025{col 54}{space 4} .0252155{col 67}{space 3} .3711464
+{txt}{space 8}L5D. {c |}{col 14}{res}{space 2}-.0798323{col 26}{space 2} .0810632{col 37}{space 1}   -0.98{col 46}{space 3}0.328{col 54}{space 4}-.2412497{col 67}{space 3}  .081585
+{txt}{space 8}L6D. {c |}{col 14}{res}{space 2}-.0701868{col 26}{space 2} .0774269{col 37}{space 1}   -0.91{col 46}{space 3}0.368{col 54}{space 4}-.2243635{col 67}{space 3} .0839899
+{txt}{space 8}L7D. {c |}{col 14}{res}{space 2}-.0832075{col 26}{space 2} .0702845{col 37}{space 1}   -1.18{col 46}{space 3}0.240{col 54}{space 4}-.2231619{col 67}{space 3} .0567469
+{txt}{space 8}L8D. {c |}{col 14}{res}{space 2}-.1365996{col 26}{space 2} .0574218{col 37}{space 1}   -2.38{col 46}{space 3}0.020{col 54}{space 4} -.250941{col 67}{space 3}-.0222581
+{txt}{space 8}L9D. {c |}{col 14}{res}{space 2}-.0699035{col 26}{space 2} .0512915{col 37}{space 1}   -1.36{col 46}{space 3}0.177{col 54}{space 4} -.172038{col 67}{space 3} .0322309
+{txt}{space 7}L10D. {c |}{col 14}{res}{space 2}-.2044621{col 26}{space 2} .0415424{col 37}{space 1}   -4.92{col 46}{space 3}0.000{col 54}{space 4}-.2871836{col 67}{space 3}-.1217407
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .6538361{col 26}{space 2} .1310419{col 37}{space 1}    4.99{col 46}{space 3}0.000{col 54}{space 4} .3928984{col 67}{space 3} .9147739
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. dfuller ln_x6t, trend regress lags(10)
+
+{txt}Augmented Dickey-Fuller test for unit root         Number of obs   = {res}       89
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -7.846            -4.064            -3.461            -3.157
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 64}
+D.ln_x6t{col 14}{c |}{col 21}Coef.{col 29}Std. Err.{col 44}t{col 49}P>|t|{col 59}[95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+      ln_x6t{col 14}{c |}
+{col 10}L1. {c |}{res}{col 17}-.2553713{col 28} .0325471{col 38}   -7.85{col 48} 0.000{col 58}-.3201944{col 70}-.1905482
+{txt}{col 10}LD. {c |}{res}{col 17} -.632266{col 28} .0776597{col 38}   -8.14{col 48} 0.000{col 58}-.7869386{col 70}-.4775933
+        {txt}L2D. {c |}{res}{col 17}-.6817816{col 28} .1019417{col 38}   -6.69{col 48} 0.000{col 58} -.884816{col 70}-.4787472
+        {txt}L3D. {c |}{res}{col 17}-.1508287{col 28} .0998732{col 38}   -1.51{col 48} 0.135{col 58}-.3497433{col 70}  .048086
+        {txt}L4D. {c |}{res}{col 17} .0295234{col 28} .0781957{col 38}    0.38{col 48} 0.707{col 58}-.1262168{col 70} .1852637
+        {txt}L5D. {c |}{res}{col 17}-.0922855{col 28} .0678404{col 38}   -1.36{col 48} 0.178{col 58}-.2274015{col 70} .0428304
+        {txt}L6D. {c |}{res}{col 17}-.0565053{col 28} .0648077{col 38}   -0.87{col 48} 0.386{col 58} -.185581{col 70} .0725703
+        {txt}L7D. {c |}{res}{col 17}-.1077335{col 28} .0589409{col 38}   -1.83{col 48} 0.072{col 58}-.2251245{col 70} .0096575
+        {txt}L8D. {c |}{res}{col 17}-.1621111{col 28} .0482302{col 38}   -3.36{col 48} 0.001{col 58}-.2581698{col 70}-.0660524
+        {txt}L9D. {c |}{res}{col 17}-.1301679{col 28} .0441293{col 38}   -2.95{col 48} 0.004{col 58}-.2180591{col 70}-.0422768
+       {txt}L10D. {c |}{res}{col 17}-.2264971{col 28} .0349535{col 38}   -6.48{col 48} 0.000{col 58} -.296113{col 70}-.1568811
+      {txt}_trend{col 14}{c |}{res}{col 17} .0063617{col 28} .0010902{col 38}    5.84{col 48} 0.000{col 58} .0041904{col 70} .0085331
+       {txt}_cons{col 14}{c |}{res}{col 17} 1.392656{col 28}  .167469{col 38}    8.32{col 48} 0.000{col 58} 1.059113{col 70}   1.7262
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. dfgls ln_x6t
+ 
+{txt}DF-GLS for {res}ln_x6t{col 58}{txt}Number of obs = {res}   87
+{txt}Maxlag = {res}12{txt} chosen by Schwert criterion
+ 
+{col 16}DF-GLS tau{col 32}1% Critical{col 50}5% Critical{col 67}10% Critical
+  [lags]{col 14}Test Statistic{col 36}Value{col 54}Value{col 72}Value
+{hline 78}
+{col 5}12{col 14}{res}    -1.972{col 31}    -3.580{col 49}    -2.745{col 67}    -2.472
+{txt}{col 5}11{col 14}{res}    -1.683{col 31}    -3.580{col 49}    -2.776{col 67}    -2.502
+{txt}{col 5}10{col 14}{res}    -1.385{col 31}    -3.580{col 49}    -2.808{col 67}    -2.532
+{txt}{col 5}9{col 14}{res}    -1.749{col 31}    -3.580{col 49}    -2.839{col 67}    -2.562
+{txt}{col 5}8{col 14}{res}    -1.221{col 31}    -3.580{col 49}    -2.869{col 67}    -2.590
+{txt}{col 5}7{col 14}{res}    -1.503{col 31}    -3.580{col 49}    -2.898{col 67}    -2.617
+{txt}{col 5}6{col 14}{res}    -1.383{col 31}    -3.580{col 49}    -2.926{col 67}    -2.643
+{txt}{col 5}5{col 14}{res}    -1.570{col 31}    -3.580{col 49}    -2.952{col 67}    -2.668
+{txt}{col 5}4{col 14}{res}    -1.335{col 31}    -3.580{col 49}    -2.977{col 67}    -2.690
+{txt}{col 5}3{col 14}{res}    -0.781{col 31}    -3.580{col 49}    -3.000{col 67}    -2.711
+{txt}{col 5}2{col 14}{res}    -0.605{col 31}    -3.580{col 49}    -3.021{col 67}    -2.730
+{txt}{col 5}1{col 14}{res}    -0.922{col 31}    -3.580{col 49}    -3.039{col 67}    -2.747
+ 
+{txt}Opt Lag (Ng-Perron seq t) = {res}12{col 22}{txt} with RMSE {res} .0650416
+{txt}Min SC   = {res}-4.798138{txt} at lag {res}12{txt} with RMSE {res} .0650416
+{txt}Min MAIC = {res}-5.054911{txt} at lag {res}12{txt} with RMSE {res} .0650416
+{txt}
+{com}. tsline ln_x5t
+{res}{txt}
+{com}. graph export Ln-x5tstationarity_Analysis.png, as(png) replace
+{txt}(file Ln-x5tstationarity_Analysis.png written in PNG format)
+
+{com}. tsline ln_x6t
+{res}{txt}
+{com}. graph export Ln-x6tstationarity_Analysis.png, as(png) replace
+{txt}(file Ln-x6tstationarity_Analysis.png written in PNG format)
+
+{com}. log close assignments_2
+      {txt}name:  {res}assignments_2
+       {txt}log:  {res}C:\Users\LENOVO\OneDrive\Desktop\Time_Series_Econometrics_Assignment\Time_Series_Econometrics_Assignment.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}19 Oct 2023, 18:20:56
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

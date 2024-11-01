@@ -1,0 +1,2413 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}PPP
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPP.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:00:58
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. foreach var of global {c -(}
+{txt}  2{com}. tab
+{txt}  3{com}. {c )-}
+{err}{c -(} invalid name
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPP, replace s name(PPP)
+{err}log file already open
+{txt}{search r(604):r(604);}
+
+end of do-file
+
+{search r(604):r(604);}
+
+{com}. log close
+{err}no log file open
+{txt}{search r(606):r(606);}
+
+{com}. logclose
+{err}command {bf}logclose{sf} is unrecognized
+{txt}{search r(199):r(199);}
+
+{com}. close log
+{err}command {bf}close{sf} is unrecognized
+{txt}{search r(199):r(199);}
+
+{com}. log close
+{err}no log file open
+{txt}{search r(606):r(606);}
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPP, replace s name(PPP)
+{err}log file already open
+{txt}{search r(604):r(604);}
+
+end of do-file
+
+{search r(604):r(604);}
+
+{com}. log close
+{err}no log file open
+{txt}{search r(606):r(606);}
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPP, replace s name(PPP)
+{err}log file already open
+{txt}{search r(604):r(604);}
+
+end of do-file
+
+{search r(604):r(604);}
+
+{com}. log close
+{err}no log file open
+{txt}{search r(606):r(606);}
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}(note: file C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl not found)
+{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:04:28
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. tsline GermanyEX  rel_USDGermanyCPI 
+{res}{txt}
+{com}. graph save USDGermany , replace 
+{res}{txt}(file USDGermany.gph saved)
+
+{com}. tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+{res}{txt}
+{com}. graph save USDUnitedKingdom , replace 
+{res}{txt}(file USDUnitedKingdom.gph saved)
+
+{com}. tsline IndiaEX  rel_USDIndiaCPI 
+{res}{txt}
+{com}. graph save USDIndiaEX , replace
+{res}{txt}(file USDIndiaEX.gph saved)
+
+{com}. tsline JapanEX rel_USDJapanCPI
+{res}{txt}
+{com}. graph save USDJapanEX , replace
+{res}{txt}(file USDJapanEX.gph saved)
+
+{com}. 
+. tsline SwitzerlandEX rel_USDThailandCPI
+{res}{txt}
+{com}. tsline ThailandEX  rel_USDSwitzerlandCPI
+{res}{txt}
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:04:31
+{txt}{.-}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPP.do"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:06:45
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. tsline GermanyEX  rel_USDGermanyCPI 
+{res}{txt}
+{com}. graph save USDGermany.png , replace 
+{txt}(note: file USDGermany.png not found)
+{res}{txt}(file USDGermany.png saved)
+
+{com}. tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+{res}{txt}
+{com}. graph save USDUnitedKingdom.png , replace 
+{txt}(note: file USDUnitedKingdom.png not found)
+{res}{txt}(file USDUnitedKingdom.png saved)
+
+{com}. tsline IndiaEX  rel_USDIndiaCPI 
+{res}{txt}
+{com}. graph save USDIndiaEX.png , replace
+{txt}(note: file USDIndiaEX.png not found)
+{res}{txt}(file USDIndiaEX.png saved)
+
+{com}. tsline JapanEX rel_USDJapanCPI
+{res}{txt}
+{com}. graph save USDJapanEX.png , replace
+{txt}(note: file USDJapanEX.png not found)
+{res}{txt}(file USDJapanEX.png saved)
+
+{com}. 
+. tsline SwitzerlandEX rel_USDThailandCPI
+{res}{txt}
+{com}. graph save USDSwitzerlandEX.png , replace
+{txt}(note: file USDSwitzerlandEX.png not found)
+{res}{txt}(file USDSwitzerlandEX.png saved)
+
+{com}. tsline ThailandEX  rel_USDSwitzerlandCPI
+{res}{txt}
+{com}. graph save USDThailandEX.png , replace
+{txt}(note: file USDThailandEX.png not found)
+{res}{txt}(file USDThailandEX.png saved)
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:06:48
+{txt}{.-}
+
+{com}. 
+{txt}end of do-file
+
+{com}. graph export "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Graph.png", as(png) replace
+{txt}(note: file C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Graph.png not found)
+(file C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Graph.png written in PNG format)
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:10:49
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. tsline GermanyEX  rel_USDGermanyCPI 
+{res}{txt}
+{com}. 
+. graph export GermanyEX , as(png) replace
+{txt}(note: file GermanyEX not found)
+(file GermanyEX written in PNG format)
+
+{com}. 
+. tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+{res}{txt}
+{com}. graph export UnitedKingdomEX , as(png) replace
+{txt}(note: file UnitedKingdomEX not found)
+(file UnitedKingdomEX written in PNG format)
+
+{com}. tsline IndiaEX  rel_USDIndiaCPI 
+{res}{txt}
+{com}. graph export IndiaEX , as(png) replace
+{txt}(note: file IndiaEX not found)
+(file IndiaEX written in PNG format)
+
+{com}. tsline JapanEX rel_USDJapanCPI
+{res}{txt}
+{com}. graph export JapanEX , as(png) replace
+{txt}(note: file JapanEX not found)
+(file JapanEX written in PNG format)
+
+{com}. 
+. tsline SwitzerlandEX rel_USDThailandCPI
+{res}{txt}
+{com}. graph export SwitzerlandEX , as(png) replace
+{txt}(note: file SwitzerlandEX not found)
+(file SwitzerlandEX written in PNG format)
+
+{com}. tsline ThailandEX  rel_USDSwitzerlandCPI
+{res}{txt}
+{com}. graph export ThailandEX , as(png) replace
+{txt}(note: file ThailandEX not found)
+(file ThailandEX written in PNG format)
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:10:52
+{txt}{.-}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:15:17
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. foreach var in Germany UnitedKingdom India Japan UnitedStates Switzerland Thailand{c -(}
+{txt}  2{com}. tsline `var'EX  rel_USD`var'CPI
+{txt}  3{com}. graph export `var'.png , as(png) replace
+{txt}  4{com}. {c )-}
+{res}{txt}(note: file Germany.png not found)
+(file Germany.png written in PNG format)
+{res}{txt}(note: file UnitedKingdom.png not found)
+(file UnitedKingdom.png written in PNG format)
+{res}{txt}(note: file India.png not found)
+(file India.png written in PNG format)
+{res}{txt}(note: file Japan.png not found)
+(file Japan.png written in PNG format)
+{err}variable {bf}UnitedStatesEX{sf} not found
+{txt}{search r(111):r(111);}
+
+end of do-file
+
+{search r(111):r(111);}
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:15:50
+{txt}{.-}
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:15:53
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. foreach var in Germany UnitedKingdom India Japan Switzerland Thailand{c -(}
+{txt}  2{com}. tsline `var'EX  rel_USD`var'CPI
+{txt}  3{com}. graph export `var'.png , as(png) replace
+{txt}  4{com}. {c )-}
+{res}{txt}(file Germany.png written in PNG format)
+{res}{txt}(file UnitedKingdom.png written in PNG format)
+{res}{txt}(file India.png written in PNG format)
+{res}{txt}(file Japan.png written in PNG format)
+{res}{txt}(note: file Switzerland.png not found)
+(file Switzerland.png written in PNG format)
+{res}{txt}(note: file Thailand.png not found)
+(file Thailand.png written in PNG format)
+
+{com}. 
+. /*tsline GermanyEX  rel_USDGermanyCPI 
+> 
+> graph export GermanyEX , as(png) replace
+> 
+> tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+> graph export UnitedKingdomEX , as(png) replace
+> tsline IndiaEX  rel_USDIndiaCPI 
+> graph export IndiaEX , as(png) replace
+> tsline JapanEX rel_USDJapanCPI
+> graph export JapanEX , as(png) replace
+> 
+> tsline SwitzerlandEX rel_USDThailandCPI
+> graph export SwitzerlandEX , as(png) replace
+> tsline ThailandEX  rel_USDSwitzerlandCPI
+> graph export ThailandEX , as(png) replace*/
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:15:56
+{txt}{.-}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPP.do"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:19:29
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. foreach var in Germany UnitedKingdom India Japan Switzerland Thailand{c -(}
+{txt}  2{com}. tsline `var'EX  rel_USD`var'CPI
+{txt}  3{com}. graph export "EXline and Rel_prices by country\`var'.png" , as(png) replace
+{txt}  4{com}. {c )-}
+{res}{txt}(note: file EXline and Rel_prices by country.png not found)
+(file EXline and Rel_prices by country.png written in PNG format)
+{res}{txt}(file EXline and Rel_prices by country.png written in PNG format)
+{res}{txt}(file EXline and Rel_prices by country.png written in PNG format)
+{res}{txt}(file EXline and Rel_prices by country.png written in PNG format)
+{res}{txt}(file EXline and Rel_prices by country.png written in PNG format)
+{res}{txt}(file EXline and Rel_prices by country.png written in PNG format)
+
+{com}. 
+. /*tsline GermanyEX  rel_USDGermanyCPI 
+> 
+> graph export GermanyEX , as(png) replace
+> 
+> tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+> graph export UnitedKingdomEX , as(png) replace
+> tsline IndiaEX  rel_USDIndiaCPI 
+> graph export IndiaEX , as(png) replace
+> tsline JapanEX rel_USDJapanCPI
+> graph export JapanEX , as(png) replace
+> 
+> tsline SwitzerlandEX rel_USDThailandCPI
+> graph export SwitzerlandEX , as(png) replace
+> tsline ThailandEX  rel_USDSwitzerlandCPI
+> graph export ThailandEX , as(png) replace*/
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:19:32
+{txt}{.-}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:20:16
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. foreach var in Germany UnitedKingdom India Japan Switzerland Thailand{c -(}
+{txt}  2{com}. tsline `var'EX  rel_USD`var'CPI
+{txt}  3{com}. graph export EXline and Rel_prices by country\`var'.png , as(png) replace
+{txt}  4{com}. {c )-}
+{res}{err}invalid 'and' 
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:20:32
+{txt}{.-}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:20:34
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. foreach var in Germany UnitedKingdom India Japan Switzerland Thailand{c -(}
+{txt}  2{com}. tsline `var'EX  rel_USD`var'CPI
+{txt}  3{com}. graph export `var'.png , as(png) replace
+{txt}  4{com}. {c )-}
+{res}{txt}(file Germany.png written in PNG format)
+{res}{txt}(file UnitedKingdom.png written in PNG format)
+{res}{txt}(file India.png written in PNG format)
+{res}{txt}(file Japan.png written in PNG format)
+{res}{txt}(file Switzerland.png written in PNG format)
+{res}{txt}(file Thailand.png written in PNG format)
+
+{com}. 
+. /*tsline GermanyEX  rel_USDGermanyCPI 
+> 
+> graph export GermanyEX , as(png) replace
+> 
+> tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+> graph export UnitedKingdomEX , as(png) replace
+> tsline IndiaEX  rel_USDIndiaCPI 
+> graph export IndiaEX , as(png) replace
+> tsline JapanEX rel_USDJapanCPI
+> graph export JapanEX , as(png) replace
+> 
+> tsline SwitzerlandEX rel_USDThailandCPI
+> graph export SwitzerlandEX , as(png) replace
+> tsline ThailandEX  rel_USDSwitzerlandCPI
+> graph export ThailandEX , as(png) replace*/
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:20:36
+{txt}{.-}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:23:26
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. foreach var in Germany UnitedKingdom India Japan Switzerland Thailand{c -(}
+{txt}  2{com}. tsline `var'EX  rel_USD`var'CPI
+{txt}  3{com}. graph export `var'.png , as(png) replace
+{txt}  4{com}. {c )-}
+{res}{txt}(file Germany.png written in PNG format)
+{res}{txt}(file UnitedKingdom.png written in PNG format)
+{res}{txt}(file India.png written in PNG format)
+{res}{txt}(file Japan.png written in PNG format)
+{res}{txt}(file Switzerland.png written in PNG format)
+{res}{txt}(file Thailand.png written in PNG format)
+
+{com}. 
+. /*tsline GermanyEX  rel_USDGermanyCPI 
+> 
+> graph export GermanyEX , as(png) replace
+> 
+> tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+> graph export UnitedKingdomEX , as(png) replace
+> tsline IndiaEX  rel_USDIndiaCPI 
+> graph export IndiaEX , as(png) replace
+> tsline JapanEX rel_USDJapanCPI
+> graph export JapanEX , as(png) replace
+> 
+> tsline SwitzerlandEX rel_USDThailandCPI
+> graph export SwitzerlandEX , as(png) replace
+> tsline ThailandEX  rel_USDSwitzerlandCPI
+> graph export ThailandEX , as(png) replace*/
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:23:31
+{txt}{.-}
+
+{com}. translate PPPandCPI.smcl PPPandCPI.pdf
+{txt}(file PPPandCPI.pdf written in PDF format)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:24:59
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. tabstat rel_* *EX, s(me sd sk ku)
+
+{txt}   stats {...}
+{c |}{...}
+  rel~yCPI  rel~mCPI  rel~aCPI  rel~nCPI  r~Thai~I  r~Swit~I  German~X  United~X   IndiaEX   JapanEX
+{hline 9}{c +}{hline 100}
+{ralign 8:mean} {...}
+{c |}{...}
+ {res} .0004093   .000873  .0033633  .0020672  .0027513  .0010532  .0321458 -.0102726 -.0419916  .0210699
+{txt}{ralign 8:sd} {...}
+{c |}{...}
+ {res} .0148661  .0224593   .058177  .0228108   .037442  .0153686  .1433497  .0753807   .064276   .100899
+{txt}{ralign 8:skewness} {...}
+{c |}{...}
+ {res}-.1006689  -.022292  1.578956  1.560088  2.833571  -1.03403  3.435763 -.2249798  -.857657  .9790055
+{txt}{ralign 8:kurtosis} {...}
+{c |}{...}
+ {res} 4.458031  11.04975  9.261787   9.95379  17.34092  6.050894  20.78763  2.618435  4.461581  5.727771
+{txt}{hline 9}{c BT}{hline 100}
+
+   stats {...}
+{c |}{...}
+  Switze~X  Thaila~X
+{hline 9}{c +}{hline 20}
+{ralign 8:mean} {...}
+{c |}{...}
+ {res} .0291153  -.006432
+{txt}{ralign 8:sd} {...}
+{c |}{...}
+ {res} .0975281  .0557006
+{txt}{ralign 8:skewness} {...}
+{c |}{...}
+ {res} 1.272362  -1.83304
+{txt}{ralign 8:kurtosis} {...}
+{c |}{...}
+ {res} 5.485073  8.584359
+{txt}{hline 9}{c BT}{hline 20}
+
+{com}. 
+. foreach var in Germany UnitedKingdom India Japan Switzerland Thailand{c -(}
+{txt}  2{com}. tsline `var'EX  rel_USD`var'CPI
+{txt}  3{com}. graph export `var'.png , as(png) replace
+{txt}  4{com}. {c )-}
+{res}{txt}(file Germany.png written in PNG format)
+{res}{txt}(file UnitedKingdom.png written in PNG format)
+{res}{txt}(file India.png written in PNG format)
+{res}{txt}(file Japan.png written in PNG format)
+{res}{txt}(file Switzerland.png written in PNG format)
+{res}{txt}(file Thailand.png written in PNG format)
+
+{com}. 
+. /*tsline GermanyEX  rel_USDGermanyCPI 
+> 
+> graph export GermanyEX , as(png) replace
+> 
+> tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+> graph export UnitedKingdomEX , as(png) replace
+> tsline IndiaEX  rel_USDIndiaCPI 
+> graph export IndiaEX , as(png) replace
+> tsline JapanEX rel_USDJapanCPI
+> graph export JapanEX , as(png) replace
+> 
+> tsline SwitzerlandEX rel_USDThailandCPI
+> graph export SwitzerlandEX , as(png) replace
+> tsline ThailandEX  rel_USDSwitzerlandCPI
+> graph export ThailandEX , as(png) replace*/
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:25:02
+{txt}{.-}
+
+{com}. translate PPPandCPI.smcl PPPandCPI.pdf
+{txt}(file PPPandCPI.pdf written in PDF format)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\Spandan\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:25:24
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. tabstat rel_* *EX, s(me sd sk ku)
+
+{txt}   stats {...}
+{c |}{...}
+  rel~yCPI  rel~mCPI  rel~aCPI  rel~nCPI  r~Thai~I  r~Swit~I  German~X  United~X   IndiaEX   JapanEX
+{hline 9}{c +}{hline 100}
+{ralign 8:mean} {...}
+{c |}{...}
+ {res} .0004093   .000873  .0033633  .0020672  .0027513  .0010532  .0321458 -.0102726 -.0419916  .0210699
+{txt}{ralign 8:sd} {...}
+{c |}{...}
+ {res} .0148661  .0224593   .058177  .0228108   .037442  .0153686  .1433497  .0753807   .064276   .100899
+{txt}{ralign 8:skewness} {...}
+{c |}{...}
+ {res}-.1006689  -.022292  1.578956  1.560088  2.833571  -1.03403  3.435763 -.2249798  -.857657  .9790055
+{txt}{ralign 8:kurtosis} {...}
+{c |}{...}
+ {res} 4.458031  11.04975  9.261787   9.95379  17.34092  6.050894  20.78763  2.618435  4.461581  5.727771
+{txt}{hline 9}{c BT}{hline 100}
+
+   stats {...}
+{c |}{...}
+  Switze~X  Thaila~X
+{hline 9}{c +}{hline 20}
+{ralign 8:mean} {...}
+{c |}{...}
+ {res} .0291153  -.006432
+{txt}{ralign 8:sd} {...}
+{c |}{...}
+ {res} .0975281  .0557006
+{txt}{ralign 8:skewness} {...}
+{c |}{...}
+ {res} 1.272362  -1.83304
+{txt}{ralign 8:kurtosis} {...}
+{c |}{...}
+ {res} 5.485073  8.584359
+{txt}{hline 9}{c BT}{hline 20}
+
+{com}. 
+. foreach var in Germany UnitedKingdom India Japan Switzerland Thailand{c -(}
+{txt}  2{com}. tsline `var'EX  rel_USD`var'CPI
+{txt}  3{com}. graph export `var'.png , as(png) replace
+{txt}  4{com}. {c )-}
+{res}{txt}(file Germany.png written in PNG format)
+{res}{txt}(file UnitedKingdom.png written in PNG format)
+{res}{txt}(file India.png written in PNG format)
+{res}{txt}(file Japan.png written in PNG format)
+{res}{txt}(file Switzerland.png written in PNG format)
+{res}{txt}(file Thailand.png written in PNG format)
+
+{com}. 
+. /*tsline GermanyEX  rel_USDGermanyCPI 
+> 
+> graph export GermanyEX , as(png) replace
+> 
+> tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+> graph export UnitedKingdomEX , as(png) replace
+> tsline IndiaEX  rel_USDIndiaCPI 
+> graph export IndiaEX , as(png) replace
+> tsline JapanEX rel_USDJapanCPI
+> graph export JapanEX , as(png) replace
+> 
+> tsline SwitzerlandEX rel_USDThailandCPI
+> graph export SwitzerlandEX , as(png) replace
+> tsline ThailandEX  rel_USDSwitzerlandCPI
+> graph export ThailandEX , as(png) replace*/
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:25:27
+{txt}{.-}
+
+{com}. translate PPPandCPI.smcl PPPandCPI.pdf
+{txt}(file PPPandCPI.pdf written in PDF format)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPP.do"
+{txt}
+{com}. clear all
+{txt}
+{com}. cd "C:\Users\\`c(username)'\Desktop\IETF\PPP Project\Data"
+{res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data
+{txt}
+{com}. *use "PPPandCPI.dta", replace
+. log using PPPandCPI.smcl, replace 
+{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}24 Aug 2023, 23:26:29
+{txt}
+{com}. import excel "C:\Users\Spandan\Desktop\IETF\PPP Project\Data\Data.xlsx", sheet("Sheet2") firstrow clear
+{res}{txt}
+{com}. tsset Year
+{res}{txt}{col 9}time variable:  {res}{col 25}Year, 1961 to 2022
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}.  
+. foreach var in GermanyCPI UnitedKingdomCPI IndiaCPI JapanCPI ThailandCPI SwitzerlandCPI{c -(}
+{txt}  2{com}. gen rel_USD`var' = (D.UnitedStatesCPI - D.`var')/(1 + D.`var') 
+{txt}  3{com}. {c )-}
+{txt}(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+(1 missing value generated)
+
+{com}. 
+. /*foreach var in GermanyEX UnitedKingdomEX IndiaEX JapanEX UnitedStatesEX{c -(}
+> gen chgUSD`var' = (1/`var') 
+> gen USD`var' = D.chgUSD`var'
+> {c )-}*/
+. 
+. reg GermanyEX  rel_USDGermanyCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     5.37
+{txt}       Model {c |} {res} .104628249         1  .104628249   {txt}Prob > F        ={res}    0.0239
+{txt}    Residual {c |} {res} 1.14878419        59  .019470918   {txt}R-squared       ={res}    0.0835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0679
+{txt}       Total {c |} {res} 1.25341244        60  .020890207   {txt}Root MSE        =   {res} .13954
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        GermanyEX{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDGermanyCPI {c |}{col 19}{res}{space 2} 2.809008{col 31}{space 2} 1.211774{col 42}{space 1}    2.32{col 51}{space 3}0.024{col 59}{space 4} .3842533{col 72}{space 3} 5.233762
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .0308457{col 31}{space 2} .0178729{col 42}{space 1}    1.73{col 51}{space 3}0.090{col 59}{space 4} -.004918{col 72}{space 3} .0666093
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg UnitedKingdomEX  rel_USDUnitedKingdomCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.20
+{txt}       Model {c |} {res} .001153064         1  .001153064   {txt}Prob > F        ={res}    0.6588
+{txt}    Residual {c |} {res} .345356797        59  .005853505   {txt}R-squared       ={res}    0.0033
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0136
+{txt}       Total {c |} {res} .346509861        60  .005775164   {txt}Root MSE        =   {res} .07651
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        UnitedKingdomEX{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDUnitedKingdomCPI {c |}{col 25}{res}{space 2} .1951886{col 37}{space 2} .4397803{col 48}{space 1}    0.44{col 57}{space 3}0.659{col 65}{space 4}-.6848097{col 78}{space 3} 1.075187
+{txt}{space 18}_cons {c |}{col 25}{res}{space 2}-.0106114{col 37}{space 2} .0098034{col 48}{space 1}   -1.08{col 57}{space 3}0.283{col 65}{space 4} -.030228{col 78}{space 3} .0090051
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg IndiaEX  rel_USDIndiaCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.28
+{txt}       Model {c |} {res}  .00116883         1   .00116883   {txt}Prob > F        ={res}    0.6007
+{txt}    Residual {c |} {res} .249054847        59  .004221269   {txt}R-squared       ={res}    0.0047
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0122
+{txt}       Total {c |} {res} .250223677        60  .004170395   {txt}Root MSE        =   {res} .06497
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        IndiaEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDIndiaCPI {c |}{col 17}{res}{space 2} .0758663{col 29}{space 2} .1441766{col 40}{space 1}    0.53{col 49}{space 3}0.601{col 57}{space 4}-.2126305{col 70}{space 3} .3643631
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.0429351{col 29}{space 2} .0083328{col 40}{space 1}   -5.15{col 49}{space 3}0.000{col 57}{space 4}-.0596091{col 70}{space 3}-.0262611
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg JapanEX rel_USDJapanCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     2.33
+{txt}       Model {c |} {res} .023571175         1  .023571175   {txt}Prob > F        ={res}    0.1323
+{txt}    Residual {c |} {res} .596994123        59  .010118544   {txt}R-squared       ={res}    0.0380
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0217
+{txt}       Total {c |} {res} .620565297        60  .010342755   {txt}Root MSE        =   {res} .10059
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        JapanEX{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDJapanCPI {c |}{col 17}{res}{space 2} .8689077{col 29}{space 2} .5693011{col 40}{space 1}    1.53{col 49}{space 3}0.132{col 57}{space 4}-.2702613{col 70}{space 3} 2.008077
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} .0196191{col 29}{space 2}  .012933{col 40}{space 1}    1.52{col 49}{space 3}0.135{col 57}{space 4}-.0062598{col 70}{space 3}  .045498
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg SwitzerlandEX rel_USDThailandCPI 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     0.09
+{txt}       Model {c |} {res} .000908392         1  .000908392   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res} .578445553        59  .009804162   {txt}R-squared       ={res}    0.0016
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0154
+{txt}       Total {c |} {res} .579353945        60  .009655899   {txt}Root MSE        =   {res} .09902
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     SwitzerlandEX{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDThailandCPI {c |}{col 20}{res}{space 2}-.1039207{col 32}{space 2} .3414057{col 43}{space 1}   -0.30{col 52}{space 3}0.762{col 60}{space 4} -.787072{col 73}{space 3} .5792306
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} .0298785{col 32}{space 2} .0127124{col 43}{space 1}    2.35{col 52}{space 3}0.022{col 60}{space 4}  .004441{col 73}{space 3} .0553161
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg ThailandEX  rel_USDSwitzerlandCPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        61
+{txt}{hline 13}{c +}{hline 34}   F(1, 59)        = {res}     1.65
+{txt}       Model {c |} {res} .005150864         1  .005150864   {txt}Prob > F        ={res}    0.2037
+{txt}    Residual {c |} {res} .183951773        59  .003117827   {txt}R-squared       ={res}    0.0272
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0108
+{txt}       Total {c |} {res} .189102637        60  .003151711   {txt}Root MSE        =   {res} .05584
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           ThailandEX{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+rel_USDSwitzerlandCPI {c |}{col 23}{res}{space 2} .6028804{col 35}{space 2} .4690478{col 46}{space 1}    1.29{col 55}{space 3}0.204{col 63}{space 4}-.3356821{col 76}{space 3} 1.541443
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}-.0072684{col 35}{space 2} .0071663{col 46}{space 1}   -1.01{col 55}{space 3}0.315{col 63}{space 4}-.0216081{col 76}{space 3} .0070713
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. tabstat rel_* *EX, s(me sd sk ku)
+
+{txt}   stats {...}
+{c |}{...}
+  rel~yCPI  rel~mCPI  rel~aCPI  rel~nCPI  r~Thai~I  r~Swit~I  German~X  United~X   IndiaEX   JapanEX
+{hline 9}{c +}{hline 100}
+{ralign 8:mean} {...}
+{c |}{...}
+ {res} .0004093   .000873  .0033633  .0020672  .0027513  .0010532  .0321458 -.0102726 -.0419916  .0210699
+{txt}{ralign 8:sd} {...}
+{c |}{...}
+ {res} .0148661  .0224593   .058177  .0228108   .037442  .0153686  .1433497  .0753807   .064276   .100899
+{txt}{ralign 8:skewness} {...}
+{c |}{...}
+ {res}-.1006689  -.022292  1.578956  1.560088  2.833571  -1.03403  3.435763 -.2249798  -.857657  .9790055
+{txt}{ralign 8:kurtosis} {...}
+{c |}{...}
+ {res} 4.458031  11.04975  9.261787   9.95379  17.34092  6.050894  20.78763  2.618435  4.461581  5.727771
+{txt}{hline 9}{c BT}{hline 100}
+
+   stats {...}
+{c |}{...}
+  Switze~X  Thaila~X
+{hline 9}{c +}{hline 20}
+{ralign 8:mean} {...}
+{c |}{...}
+ {res} .0291153  -.006432
+{txt}{ralign 8:sd} {...}
+{c |}{...}
+ {res} .0975281  .0557006
+{txt}{ralign 8:skewness} {...}
+{c |}{...}
+ {res} 1.272362  -1.83304
+{txt}{ralign 8:kurtosis} {...}
+{c |}{...}
+ {res} 5.485073  8.584359
+{txt}{hline 9}{c BT}{hline 20}
+
+{com}. 
+. foreach var in Germany UnitedKingdom India Japan Switzerland Thailand{c -(}
+{txt}  2{com}. tsline `var'EX  rel_USD`var'CPI
+{txt}  3{com}. graph export `var'.png , as(png) replace
+{txt}  4{com}. {c )-}
+{res}{txt}(file Germany.png written in PNG format)
+{res}{txt}(file UnitedKingdom.png written in PNG format)
+{res}{txt}(file India.png written in PNG format)
+{res}{txt}(file Japan.png written in PNG format)
+{res}{txt}(file Switzerland.png written in PNG format)
+{res}{txt}(file Thailand.png written in PNG format)
+
+{com}. 
+. /*tsline GermanyEX  rel_USDGermanyCPI 
+> 
+> graph export GermanyEX , as(png) replace
+> 
+> tsline UnitedKingdomEX  rel_USDUnitedKingdomCPI
+> graph export UnitedKingdomEX , as(png) replace
+> tsline IndiaEX  rel_USDIndiaCPI 
+> graph export IndiaEX , as(png) replace
+> tsline JapanEX rel_USDJapanCPI
+> graph export JapanEX , as(png) replace
+> 
+> tsline SwitzerlandEX rel_USDThailandCPI
+> graph export SwitzerlandEX , as(png) replace
+> tsline ThailandEX  rel_USDSwitzerlandCPI
+> graph export ThailandEX , as(png) replace*/
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Spandan\Desktop\IETF\PPP Project\Data\PPPandCPI.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}24 Aug 2023, 23:26:32
+{txt}{.-}
+
+{com}. translate PPPandCPI.smcl PPPandCPI.pdf
+{txt}(file PPPandCPI.pdf written in PDF format)
+
+{com}. 
+{txt}end of do-file
+
+{com}. exit, clear

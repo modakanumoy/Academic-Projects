@@ -1,0 +1,160 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\LENOVO\OneDrive\Desktop\econometrics assignment\Question 2 Anumoy Modak.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}22 Mar 2023, 12:01:20
+{txt}
+{com}. use "dataset.dta" , clear
+{txt}
+{com}. 
+. des
+
+{txt}Contains data from {res}dataset.dta
+{txt}  obs:{res}       101,651                          
+{txt} vars:{res}            11                          26 Apr 2022 09:44
+{txt} size:{res}     5,387,503                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:HHID           }{txt}{bind: str9    }{bind:{txt}%-9s      }{space 1}{bind:         }{bind:  }{res}{res}Household identification{p_end}
+{p 0 48}{bind:nos_Child18    }{txt}{bind: double  }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}(sum) nos_Child18{p_end}
+{p 0 48}{bind:Religion       }{txt}{bind: str1    }{bind:{txt}%-1s      }{space 1}{bind:         }{bind:  }{res}{res}Religion Code{p_end}
+{p 0 48}{bind:SCGRP          }{txt}{bind: str1    }{bind:{txt}%-1s      }{space 1}{bind:         }{bind:  }{res}{res}Social Group Code{p_end}
+{p 0 48}{bind:State_code     }{txt}{bind: str2    }{bind:{txt}%-2s      }{space 1}{bind:         }{bind:  }{res}{res}State Code{p_end}
+{p 0 48}{bind:Combined_Mult~r}{txt}{bind: double  }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Sampling Weights{p_end}
+{p 0 48}{bind:noscm          }{txt}{bind: double  }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}number of currently married couples in the household{p_end}
+{p 0 48}{bind:Age            }{txt}{bind: float   }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}mean age of the household{p_end}
+{p 0 48}{bind:educ_female    }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Average Education of Female at Child Bearing age{p_end}
+{p 0 48}{bind:educ_female_Old}{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Average Education of Female age 60 and above{p_end}
+{p 0 48}{bind:fp             }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}1 if households makes an expenditure on family planning 0 else{p_end}
+{txt}{hline}
+Sorted by: {res}HHID
+{txt}
+{com}. 
+. reg nos_Child18 educ* Age fp noscm
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    14,875
+{txt}{hline 13}{c +}{hline 34}   F(5, 14869)     = {res}  3857.50
+{txt}       Model {c |} {res} 21697.8723         5  4339.57445   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  16727.193    14,869  1.12497095   {txt}R-squared       ={res}    0.5647
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.5645
+{txt}       Total {c |} {res} 38425.0653    14,874  2.58337134   {txt}Root MSE        =   {res} 1.0606
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    nos_Child18{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}educ_female {c |}{col 17}{res}{space 2}-.0946547{col 29}{space 2} .0053775{col 40}{space 1}  -17.60{col 49}{space 3}0.000{col 57}{space 4}-.1051952{col 70}{space 3}-.0841142
+{txt}educ_female_Old {c |}{col 17}{res}{space 2}  .041533{col 29}{space 2} .0048913{col 40}{space 1}    8.49{col 49}{space 3}0.000{col 57}{space 4} .0319455{col 70}{space 3} .0511205
+{txt}{space 12}Age {c |}{col 17}{res}{space 2}-.0721795{col 29}{space 2} .0007097{col 40}{space 1} -101.71{col 49}{space 3}0.000{col 57}{space 4}-.0735705{col 70}{space 3}-.0707885
+{txt}{space 13}fp {c |}{col 17}{res}{space 2}-.1255784{col 29}{space 2}  .051287{col 40}{space 1}   -2.45{col 49}{space 3}0.014{col 57}{space 4}-.2261072{col 70}{space 3}-.0250495
+{txt}{space 10}noscm {c |}{col 17}{res}{space 2} .2596229{col 29}{space 2} .0055263{col 40}{space 1}   46.98{col 49}{space 3}0.000{col 57}{space 4} .2487907{col 70}{space 3} .2704552
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} 4.213023{col 29}{space 2} .0420586{col 40}{space 1}  100.17{col 49}{space 3}0.000{col 57}{space 4} 4.130583{col 70}{space 3} 4.295463
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. estat hettest 
+
+{txt}Breusch-Pagan / Cook-Weisberg test for heteroskedasticity 
+         Ho: Constant variance
+{p 9 20}Variables: fitted values of nos_Child18
+
+{col 10}chi2({res}1{txt}){col 23}={res}  3146.84
+{txt}{col 10}Prob > chi2{col 23}={res}   0.0000
+{txt}
+{com}. ***Test of Heteroskadesticity: H0 is rejected***
+. 
+. ***QUESTION 2: PART A [Explanetions in doc file]***
+. 
+. 
+. ***QUESTION 2: PART B***
+. 
+. reg nos_Child18 educ_female educ_female_Old Age fp noscm [aweight=Combined_Multiplier]
+{txt}(sum of wgt is   3.3710e+07)
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}    14,875
+{txt}{hline 13}{c +}{hline 34}   F(5, 14869)     = {res}  3999.22
+{txt}       Model {c |} {res} 21064.7749         5  4212.95497   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 15663.6523    14,869  1.05344356   {txt}R-squared       ={res}    0.5735
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.5734
+{txt}       Total {c |} {res} 36728.4272    14,874  2.46930396   {txt}Root MSE        =   {res} 1.0264
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    nos_Child18{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}educ_female {c |}{col 17}{res}{space 2}-.0784838{col 29}{space 2}  .005373{col 40}{space 1}  -14.61{col 49}{space 3}0.000{col 57}{space 4}-.0890156{col 70}{space 3} -.067952
+{txt}educ_female_Old {c |}{col 17}{res}{space 2} .0314886{col 29}{space 2} .0051892{col 40}{space 1}    6.07{col 49}{space 3}0.000{col 57}{space 4} .0213171{col 70}{space 3} .0416602
+{txt}{space 12}Age {c |}{col 17}{res}{space 2} -.070354{col 29}{space 2} .0006625{col 40}{space 1} -106.19{col 49}{space 3}0.000{col 57}{space 4}-.0716525{col 70}{space 3}-.0690554
+{txt}{space 13}fp {c |}{col 17}{res}{space 2} -.128237{col 29}{space 2}  .056214{col 40}{space 1}   -2.28{col 49}{space 3}0.023{col 57}{space 4}-.2384233{col 70}{space 3}-.0180507
+{txt}{space 10}noscm {c |}{col 17}{res}{space 2} .2177873{col 29}{space 2} .0056838{col 40}{space 1}   38.32{col 49}{space 3}0.000{col 57}{space 4} .2066463{col 70}{space 3} .2289283
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} 4.198221{col 29}{space 2} .0400821{col 40}{space 1}  104.74{col 49}{space 3}0.000{col 57}{space 4} 4.119655{col 70}{space 3} 4.276787
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***QUESTION 2: PART C***
+. 
+. destring Religion SCGRP State_code , replace 
+{txt}Religion: all characters numeric; {res}replaced {txt}as {res}byte
+{txt}(6 missing values generated)
+{res}{txt}SCGRP: all characters numeric; {res}replaced {txt}as {res}byte
+{txt}(15 missing values generated)
+{res}{txt}State_code: all characters numeric; {res}replaced {txt}as {res}byte
+{txt}
+{com}. 
+. *Now we can run regression
+. reg nos_Child18 educ_female educ_female_Old Age fp noscm i.Religion i.SCGRP i.State_code [aweight=Combined_Multiplier]
+{txt}(sum of wgt is   3.3705e+07)
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}    14,870
+{txt}{hline 13}{c +}{hline 34}   F(49, 14820)    = {res}   434.22
+{txt}       Model {c |} {res} 21625.6246        49  441.339277   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  15062.913    14,820  1.01639089   {txt}R-squared       ={res}    0.5894
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.5881
+{txt}       Total {c |} {res} 36688.5376    14,869  2.46745158   {txt}Root MSE        =   {res} 1.0082
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    nos_Child18{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}educ_female {c |}{col 17}{res}{space 2}-.0568838{col 29}{space 2} .0055672{col 40}{space 1}  -10.22{col 49}{space 3}0.000{col 57}{space 4}-.0677962{col 70}{space 3}-.0459714
+{txt}educ_female_Old {c |}{col 17}{res}{space 2} .0275122{col 29}{space 2} .0051602{col 40}{space 1}    5.33{col 49}{space 3}0.000{col 57}{space 4} .0173976{col 70}{space 3} .0376267
+{txt}{space 12}Age {c |}{col 17}{res}{space 2}-.0685949{col 29}{space 2} .0006652{col 40}{space 1} -103.11{col 49}{space 3}0.000{col 57}{space 4}-.0698988{col 70}{space 3}-.0672909
+{txt}{space 13}fp {c |}{col 17}{res}{space 2}-.0755198{col 29}{space 2} .0561013{col 40}{space 1}   -1.35{col 49}{space 3}0.178{col 57}{space 4}-.1854854{col 70}{space 3} .0344458
+{txt}{space 10}noscm {c |}{col 17}{res}{space 2} .2022715{col 29}{space 2} .0057047{col 40}{space 1}   35.46{col 49}{space 3}0.000{col 57}{space 4} .1910896{col 70}{space 3} .2134534
+{txt}{space 15} {c |}
+{space 7}Religion {c |}
+{space 13}2  {c |}{col 17}{res}{space 2} .2594621{col 29}{space 2}  .029981{col 40}{space 1}    8.65{col 49}{space 3}0.000{col 57}{space 4} .2006955{col 70}{space 3} .3182287
+{txt}{space 13}3  {c |}{col 17}{res}{space 2}   .01055{col 29}{space 2} .0531776{col 40}{space 1}    0.20{col 49}{space 3}0.843{col 57}{space 4}-.0936848{col 70}{space 3} .1147847
+{txt}{space 13}4  {c |}{col 17}{res}{space 2}-.1635617{col 29}{space 2} .0794932{col 40}{space 1}   -2.06{col 49}{space 3}0.040{col 57}{space 4}-.3193783{col 70}{space 3}-.0077451
+{txt}{space 13}5  {c |}{col 17}{res}{space 2}-.1668795{col 29}{space 2} .1141423{col 40}{space 1}   -1.46{col 49}{space 3}0.144{col 57}{space 4}-.3906125{col 70}{space 3} .0568536
+{txt}{space 13}6  {c |}{col 17}{res}{space 2}-.3812434{col 29}{space 2} .1097179{col 40}{space 1}   -3.47{col 49}{space 3}0.001{col 57}{space 4}-.5963041{col 70}{space 3}-.1661828
+{txt}{space 13}7  {c |}{col 17}{res}{space 2} .2149467{col 29}{space 2} .9263651{col 40}{space 1}    0.23{col 49}{space 3}0.817{col 57}{space 4}-1.600844{col 70}{space 3} 2.030737
+{txt}{space 13}9  {c |}{col 17}{res}{space 2} .4361005{col 29}{space 2} .2358131{col 40}{space 1}    1.85{col 49}{space 3}0.064{col 57}{space 4}-.0261224{col 70}{space 3} .8983234
+{txt}{space 15} {c |}
+{space 10}SCGRP {c |}
+{space 13}2  {c |}{col 17}{res}{space 2}-.1234337{col 29}{space 2} .0400085{col 40}{space 1}   -3.09{col 49}{space 3}0.002{col 57}{space 4}-.2018554{col 70}{space 3}-.0450121
+{txt}{space 13}3  {c |}{col 17}{res}{space 2}-.0341307{col 29}{space 2} .0369606{col 40}{space 1}   -0.92{col 49}{space 3}0.356{col 57}{space 4}-.1065782{col 70}{space 3} .0383167
+{txt}{space 13}9  {c |}{col 17}{res}{space 2}-.1250515{col 29}{space 2} .0384989{col 40}{space 1}   -3.25{col 49}{space 3}0.001{col 57}{space 4} -.200514{col 70}{space 3}-.0495889
+{txt}{space 15} {c |}
+{space 5}State_code {c |}
+{space 13}2  {c |}{col 17}{res}{space 2} .4248781{col 29}{space 2} .1307675{col 40}{space 1}    3.25{col 49}{space 3}0.001{col 57}{space 4} .1685576{col 70}{space 3} .6811987
+{txt}{space 13}3  {c |}{col 17}{res}{space 2} .2010526{col 29}{space 2} .1157263{col 40}{space 1}    1.74{col 49}{space 3}0.082{col 57}{space 4}-.0257854{col 70}{space 3} .4278906
+{txt}{space 13}4  {c |}{col 17}{res}{space 2} .1260173{col 29}{space 2}  .372997{col 40}{space 1}    0.34{col 49}{space 3}0.735{col 57}{space 4}-.6051032{col 70}{space 3} .8571377
+{txt}{space 13}5  {c |}{col 17}{res}{space 2} .2558729{col 29}{space 2} .1262743{col 40}{space 1}    2.03{col 49}{space 3}0.043{col 57}{space 4} .0083596{col 70}{space 3} .5033861
+{txt}{space 13}6  {c |}{col 17}{res}{space 2} .1882546{col 29}{space 2} .1083209{col 40}{space 1}    1.74{col 49}{space 3}0.082{col 57}{space 4}-.0240679{col 70}{space 3}  .400577
+{txt}{space 13}7  {c |}{col 17}{res}{space 2} .2293039{col 29}{space 2} .1274172{col 40}{space 1}    1.80{col 49}{space 3}0.072{col 57}{space 4}-.0204497{col 70}{space 3} .4790576
+{txt}{space 13}8  {c |}{col 17}{res}{space 2} .3375039{col 29}{space 2} .1003326{col 40}{space 1}    3.36{col 49}{space 3}0.001{col 57}{space 4} .1408395{col 70}{space 3} .5341682
+{txt}{space 13}9  {c |}{col 17}{res}{space 2} .5015172{col 29}{space 2} .0955316{col 40}{space 1}    5.25{col 49}{space 3}0.000{col 57}{space 4} .3142634{col 70}{space 3}  .688771
+{err}{hline 2}Break{hline 2}
+{txt}{search r(1), local:r(1);}
+
+end of do-file
+
+{err}{hline 2}Break{hline 2}
+{txt}{search r(1), local:r(1);}
+
+{com}.  end
+{err}command {bf}end{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. exit, clear

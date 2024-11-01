@@ -1,0 +1,255 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\LENOVO\OneDrive\Desktop\econometrics assignment\Question 1 Anumoy Modak.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}22 Mar 2023, 12:36:41
+{txt}
+{com}. /*
+> Roll No: ME22002
+> name: Anumoy Modak
+> School : School of Economics , Xavier University , Bhubaneshwar.
+> */
+. 
+. **QUESTION 1: PART A**
+. 
+. ***** Haushman's test ******
+. reg y y2 x1 x2
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,000
+{txt}{hline 13}{c +}{hline 34}   F(3, 996)       = {res} 38420.78
+{txt}       Model {c |} {res} 20461326.2         3  6820442.05   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 176809.517       996  177.519595   {txt}R-squared       ={res}    0.9914
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9914
+{txt}       Total {c |} {res} 20638135.7       999  20658.7945   {txt}Root MSE        =   {res} 13.324
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}y2 {c |}{col 14}{res}{space 2}  1.65592{col 26}{space 2} .0231798{col 37}{space 1}   71.44{col 46}{space 3}0.000{col 54}{space 4} 1.610433{col 67}{space 3} 1.701407
+{txt}{space 10}x1 {c |}{col 14}{res}{space 2} .3365774{col 26}{space 2} .0381915{col 37}{space 1}    8.81{col 46}{space 3}0.000{col 54}{space 4} .2616324{col 67}{space 3} .4115225
+{txt}{space 10}x2 {c |}{col 14}{res}{space 2} 1.000348{col 26}{space 2} .0030611{col 37}{space 1}  326.80{col 46}{space 3}0.000{col 54}{space 4} .9943408{col 67}{space 3} 1.006355
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 92.80437{col 26}{space 2} 1.638503{col 37}{space 1}   56.64{col 46}{space 3}0.000{col 54}{space 4} 89.58905{col 67}{space 3} 96.01968
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estimates store efficient
+{txt}
+{com}. 
+. ****run IV 2SLS regression****
+. ivregress 2sls y x1 x2 (y2 = z1 z2)
+{res}
+{txt}{col 1}Instrumental variables (2SLS) regression{col 51}Number of obs{col 67}= {res}     1,000
+{txt}{col 1}{col 51}Wald chi2({res}3{txt}){col 67}= {res}  66428.78
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.9856
+{txt}{col 51}Root MSE{col 67}=    {res} 17.219
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}y2 {c |}{col 14}{res}{space 2} 1.054019{col 26}{space 2} .0483232{col 37}{space 1}   21.81{col 46}{space 3}0.000{col 54}{space 4} .9593073{col 67}{space 3} 1.148731
+{txt}{space 10}x1 {c |}{col 14}{res}{space 2} .9494548{col 26}{space 2} .0626645{col 37}{space 1}   15.15{col 46}{space 3}0.000{col 54}{space 4} .8266347{col 67}{space 3} 1.072275
+{txt}{space 10}x2 {c |}{col 14}{res}{space 2} .9982991{col 26}{space 2} .0039582{col 37}{space 1}  252.21{col 46}{space 3}0.000{col 54}{space 4} .9905412{col 67}{space 3} 1.006057
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 122.6238{col 26}{space 2} 2.830694{col 37}{space 1}   43.32{col 46}{space 3}0.000{col 54}{space 4} 117.0758{col 67}{space 3} 128.1719
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 15 79}Instrumented:{space 2}y2{p_end}
+{p 0 15 79}Instruments:{space 3}x1 x2 z1 z2{p_end}
+
+{com}. 
+. 
+. estimates store consistent
+{txt}
+{com}. hausman consistent efficient
+
+{txt}{col 18}{hline 4} Coefficients {hline 4}
+{col 14}{c |}{col 21}(b){col 34}(B){col 49}(b-B){col 59}sqrt(diag(V_b-V_B))
+{col 14}{c |}{col 17} consistent {col 30} efficient  {col 46}Difference{col 66}S.E.
+{hline 13}{c +}{hline 64}
+{space 10}y2 {c |}{res}{col 18} 1.054019{col 31}  1.65592{col 47}-.6019014{col 63} .0424007
+{txt}{space 10}x1 {c |}{res}{col 18} .9494548{col 31} .3365774{col 47} .6128774{col 63} .0496814
+{txt}{space 10}x2 {c |}{res}{col 18} .9982991{col 31} 1.000348{col 47}-.0020485{col 63} .0025094
+{txt}{hline 13}{c BT}{hline 64}
+{ralign 78:b = consistent under Ho and Ha; obtained from ivregress}
+{ralign 78:B = inconsistent under Ha, efficient under Ho; obtained from regress}
+
+    Test:  Ho:  difference in coefficients not systematic
+
+{ralign 25:chi2({res:3})} = (b-B)'[(V_b-V_B)^(-1)](b-B)
+{col 27}=  {res}    201.51
+{txt}{col 17}Prob>chi2 =  {res}    0.0000
+{txt}
+{com}. /* H0: efficient = consistent (iv_coefficient and OLS_coefficient are 
+>        asymptotically equal)
+>    H1: efficient not equal to consistent 
+>    */
+.    
+. **QUESTION 1: PART B**
+. 
+. **** Run 1st stage SLS ****
+. 
+. reg y2 x1 x2 z1 z2
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,000
+{txt}{hline 13}{c +}{hline 34}   F(4, 995)       = {res}   405.23
+{txt}       Model {c |} {res} 331369.744         4   82842.436   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 203413.312       995  204.435489   {txt}R-squared       ={res}    0.6196
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.6181
+{txt}       Total {c |} {res} 534783.056       999  535.318374   {txt}Root MSE        =   {res} 14.298
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}          y2{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}x1 {c |}{col 14}{res}{space 2} 1.015262{col 26}{space 2}  .032228{col 37}{space 1}   31.50{col 46}{space 3}0.000{col 54}{space 4}  .952019{col 67}{space 3} 1.078504
+{txt}{space 10}x2 {c |}{col 14}{res}{space 2}-.0046892{col 26}{space 2} .0032849{col 37}{space 1}   -1.43{col 46}{space 3}0.154{col 54}{space 4}-.0111353{col 67}{space 3} .0017569
+{txt}{space 10}z1 {c |}{col 14}{res}{space 2} .8731696{col 26}{space 2}   .38931{col 37}{space 1}    2.24{col 46}{space 3}0.025{col 54}{space 4} .1092068{col 67}{space 3} 1.637132
+{txt}{space 10}z2 {c |}{col 14}{res}{space 2} 1.031896{col 26}{space 2} .0416354{col 37}{space 1}   24.78{col 46}{space 3}0.000{col 54}{space 4} .9501931{col 67}{space 3}   1.1136
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 25.44231{col 26}{space 2} 1.921542{col 37}{space 1}   13.24{col 46}{space 3}0.000{col 54}{space 4} 21.67157{col 67}{space 3} 29.21306
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict y2_hat 
+{txt}(option {bf:xb} assumed; fitted values)
+
+{com}. predict v_hat , resid
+{txt}
+{com}. 
+. ***run 2sls***
+. reg y x1 x2 y2_hat
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,000
+{txt}{hline 13}{c +}{hline 34}   F(3, 996)       = {res}  6944.09
+{txt}       Model {c |} {res} 19696439.9         3  6565479.98   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 941695.734       996  945.477644   {txt}R-squared       ={res}    0.9544
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9542
+{txt}       Total {c |} {res} 20638135.7       999  20658.7945   {txt}Root MSE        =   {res} 30.749
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}x1 {c |}{col 14}{res}{space 2} .9494548{col 26}{space 2} .1119003{col 37}{space 1}    8.48{col 46}{space 3}0.000{col 54}{space 4} .7298675{col 67}{space 3} 1.169042
+{txt}{space 10}x2 {c |}{col 14}{res}{space 2} .9982991{col 26}{space 2} .0070681{col 37}{space 1}  141.24{col 46}{space 3}0.000{col 54}{space 4}  .984429{col 67}{space 3} 1.012169
+{txt}{space 6}y2_hat {c |}{col 14}{res}{space 2} 1.054019{col 26}{space 2} .0862909{col 37}{space 1}   12.21{col 46}{space 3}0.000{col 54}{space 4}  .884686{col 67}{space 3} 1.223352
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 122.6238{col 26}{space 2} 5.054786{col 37}{space 1}   24.26{col 46}{space 3}0.000{col 54}{space 4} 112.7046{col 67}{space 3} 132.5431
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***OR***
+. gen y2_minus_vhat = (y2 - v_hat)
+{txt}
+{com}. dis (y2 - v_hat)
+{res}85.854792
+{txt}
+{com}. 
+. ***now 2sls***
+. reg y y2_minus_vhat x1 x2
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,000
+{txt}{hline 13}{c +}{hline 34}   F(3, 996)       = {res}  6944.09
+{txt}       Model {c |} {res}   19696440         3  6565479.99   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 941695.726       996  945.477636   {txt}R-squared       ={res}    0.9544
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9542
+{txt}       Total {c |} {res} 20638135.7       999  20658.7945   {txt}Root MSE        =   {res} 30.749
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            y{col 15}{c |}      Coef.{col 27}   Std. Err.{col 39}      t{col 47}   P>|t|{col 55}     [95% Con{col 68}f. Interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+y2_minus_vhat {c |}{col 15}{res}{space 2} 1.054019{col 27}{space 2} .0862909{col 38}{space 1}   12.21{col 47}{space 3}0.000{col 55}{space 4}  .884686{col 68}{space 3} 1.223352
+{txt}{space 11}x1 {c |}{col 15}{res}{space 2} .9494548{col 27}{space 2} .1119003{col 38}{space 1}    8.48{col 47}{space 3}0.000{col 55}{space 4} .7298674{col 68}{space 3} 1.169042
+{txt}{space 11}x2 {c |}{col 15}{res}{space 2} .9982991{col 27}{space 2} .0070681{col 38}{space 1}  141.24{col 47}{space 3}0.000{col 55}{space 4}  .984429{col 68}{space 3} 1.012169
+{txt}{space 8}_cons {c |}{col 15}{res}{space 2} 122.6238{col 27}{space 2} 5.054786{col 38}{space 1}   24.26{col 47}{space 3}0.000{col 55}{space 4} 112.7046{col 68}{space 3} 132.5431
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. **QUESTION 1: PART C**
+. reg y2 z1 z2 x1 x2
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,000
+{txt}{hline 13}{c +}{hline 34}   F(4, 995)       = {res}   405.23
+{txt}       Model {c |} {res} 331369.744         4   82842.436   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 203413.312       995  204.435489   {txt}R-squared       ={res}    0.6196
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.6181
+{txt}       Total {c |} {res} 534783.056       999  535.318374   {txt}Root MSE        =   {res} 14.298
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}          y2{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}z1 {c |}{col 14}{res}{space 2} .8731696{col 26}{space 2}   .38931{col 37}{space 1}    2.24{col 46}{space 3}0.025{col 54}{space 4} .1092068{col 67}{space 3} 1.637132
+{txt}{space 10}z2 {c |}{col 14}{res}{space 2} 1.031896{col 26}{space 2} .0416354{col 37}{space 1}   24.78{col 46}{space 3}0.000{col 54}{space 4} .9501931{col 67}{space 3}   1.1136
+{txt}{space 10}x1 {c |}{col 14}{res}{space 2} 1.015262{col 26}{space 2}  .032228{col 37}{space 1}   31.50{col 46}{space 3}0.000{col 54}{space 4}  .952019{col 67}{space 3} 1.078504
+{txt}{space 10}x2 {c |}{col 14}{res}{space 2}-.0046892{col 26}{space 2} .0032849{col 37}{space 1}   -1.43{col 46}{space 3}0.154{col 54}{space 4}-.0111353{col 67}{space 3} .0017569
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 25.44231{col 26}{space 2} 1.921542{col 37}{space 1}   13.24{col 46}{space 3}0.000{col 54}{space 4} 21.67157{col 67}{space 3} 29.21306
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. test z1=z2=0
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}z1 - z2 = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} z1 = 0{p_end}
+
+{txt}       F(  2,   995) ={res}  310.55
+{txt}{col 13}Prob > F ={res}    0.0000
+{txt}
+{com}. 
+. **QUESTION 1: PART D (Test of Exogenety)** 
+. ivregress 2sls y x1 x2 (y2 = z1 z2)
+{res}
+{txt}{col 1}Instrumental variables (2SLS) regression{col 51}Number of obs{col 67}= {res}     1,000
+{txt}{col 1}{col 51}Wald chi2({res}3{txt}){col 67}= {res}  66428.78
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.9856
+{txt}{col 51}Root MSE{col 67}=    {res} 17.219
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}y2 {c |}{col 14}{res}{space 2} 1.054019{col 26}{space 2} .0483232{col 37}{space 1}   21.81{col 46}{space 3}0.000{col 54}{space 4} .9593073{col 67}{space 3} 1.148731
+{txt}{space 10}x1 {c |}{col 14}{res}{space 2} .9494548{col 26}{space 2} .0626645{col 37}{space 1}   15.15{col 46}{space 3}0.000{col 54}{space 4} .8266347{col 67}{space 3} 1.072275
+{txt}{space 10}x2 {c |}{col 14}{res}{space 2} .9982991{col 26}{space 2} .0039582{col 37}{space 1}  252.21{col 46}{space 3}0.000{col 54}{space 4} .9905412{col 67}{space 3} 1.006057
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 122.6238{col 26}{space 2} 2.830694{col 37}{space 1}   43.32{col 46}{space 3}0.000{col 54}{space 4} 117.0758{col 67}{space 3} 128.1719
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 15 79}Instrumented:{space 2}y2{p_end}
+{p 0 15 79}Instruments:{space 3}x1 x2 z1 z2{p_end}
+
+{com}. estat overid
+
+{txt}{col 3}Tests of overidentifying restrictions:
+
+{col 3}Sargan (score) chi2({res}1{txt}){col 26}={res}{col 28} .055458{txt}{col 38}(p = {res}0.8138{txt})
+{col 3}Basmann chi2({res}1{txt}){col 26}={res}{col 28} .055184{txt}{col 38}(p = {res}0.8143{txt})
+
+{com}. predict u_hat_2sls, resid
+{txt}
+{com}. reg u_hat_2sls x1 x2 z1 z2
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,000
+{txt}{hline 13}{c +}{hline 34}   F(4, 995)       = {res}     0.01
+{txt}       Model {c |} {res} 16.4436555         4  4.11091388   {txt}Prob > F        ={res}    0.9996
+{txt}    Residual {c |} {res} 296488.185       995  297.978076   {txt}R-squared       ={res}    0.0001
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0040
+{txt}       Total {c |} {res} 296504.629       999  296.801431   {txt}Root MSE        =   {res} 17.262
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}  u_hat_2sls{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}x1 {c |}{col 14}{res}{space 2} .0001852{col 26}{space 2} .0389087{col 37}{space 1}    0.00{col 46}{space 3}0.996{col 54}{space 4}-.0761674{col 67}{space 3} .0765379
+{txt}{space 10}x2 {c |}{col 14}{res}{space 2}-.0000182{col 26}{space 2} .0039658{col 37}{space 1}   -0.00{col 46}{space 3}0.996{col 54}{space 4}-.0078006{col 67}{space 3} .0077641
+{txt}{space 10}z1 {c |}{col 14}{res}{space 2} -.109964{col 26}{space 2} .4700126{col 37}{space 1}   -0.23{col 46}{space 3}0.815{col 54}{space 4}-1.032294{col 67}{space 3} .8123657
+{txt}{space 10}z2 {c |}{col 14}{res}{space 2} .0012402{col 26}{space 2} .0502663{col 37}{space 1}    0.02{col 46}{space 3}0.980{col 54}{space 4}-.0973998{col 67}{space 3} .0998803
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .3086257{col 26}{space 2} 2.319872{col 37}{space 1}    0.13{col 46}{space 3}0.894{col 54}{space 4}-4.243777{col 67}{space 3} 4.861028
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. test z1=z2=0
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}z1 - z2 = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} z1 = 0{p_end}
+
+{txt}       F(  2,   995) ={res}    0.03
+{txt}{col 13}Prob > F ={res}    0.9728
+{txt}
+{com}. 
+. log close 
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\LENOVO\OneDrive\Desktop\econometrics assignment\Question 1 Anumoy Modak.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}22 Mar 2023, 12:36:41
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
